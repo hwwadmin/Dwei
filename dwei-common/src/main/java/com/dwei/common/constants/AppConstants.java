@@ -12,6 +12,7 @@ public interface AppConstants {
 
     ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     ZoneId ZONE_ID = ZONE_OFFSET;
+    String GMT8 = "GMT+8"; // 东8区
 
     /**
      * 空字符串
