@@ -1,9 +1,9 @@
 package com.dwei.common.result;
 
+import com.dwei.common.constants.AppConstants;
+import com.dwei.common.enums.StatusCodeEnum;
+import com.dwei.common.utils.ObjectUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yomi.boot.common.constants.AppConstants;
-import com.yomi.boot.common.enums.StatusCodeEnum;
-import com.yomi.boot.common.utils.ObjectUtils;
 import lombok.Getter;
 
 import java.util.Objects;
@@ -13,18 +13,17 @@ import java.util.Objects;
  *
  * @author hww
  */
+@Getter
 public abstract class AbstractRespResult {
 
     /**
      * 响应状态
      */
-    @Getter
     private final int code;
 
     /**
      * 响应消息
      */
-    @Getter
     private final String msg;
 
     protected AbstractRespResult() {

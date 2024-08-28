@@ -1,9 +1,9 @@
 package com.dwei.common.result;
 
+import com.dwei.common.enums.StatusCodeEnum;
+import com.dwei.common.exception.AbstractRuntimeException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.yomi.boot.common.enums.StatusCodeEnum;
-import com.yomi.boot.common.exception.AbstractRuntimeException;
 import lombok.Getter;
 
 /**
