@@ -14,7 +14,7 @@ import java.util.function.Function;
  *
  * @author hww
  */
-public abstract class MapUtils {
+public abstract class Maps {
 
     public static <K, V> Map<K, V> of() {
         return new HashMap<>();

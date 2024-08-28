@@ -37,7 +37,7 @@ public abstract class ObjectUtils {
         if (obj instanceof String) return StringUtils.isBlank((String) obj);
         if (obj instanceof CharSequence) return StringUtils.isBlank((CharSequence) obj);
         if (obj instanceof Collection) return CollectionUtils.isEmpty((Collection<?>) obj);
-        if (obj instanceof Map) return MapUtils.isEmpty((Map<?, ?>) obj);
+        if (obj instanceof Map) return Maps.isEmpty((Map<?, ?>) obj);
         if (obj.getClass().isArray()) return Array.getLength(obj) == 0;
         if (obj instanceof Optional<?> optional) return optional.map(ObjectUtils::isNull).orElse(true);
         // else
