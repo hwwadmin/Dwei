@@ -6,6 +6,7 @@
     <version>1.0</version>
     <modules>
         <module>dwei-common</module>
+        <module>dwei-core</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -13,6 +14,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.4</version>
+        <relativePath/>
     </parent>
 
     <properties>
@@ -22,26 +24,16 @@
         <java.version>21</java.version>
         <skipTests>true</skipTests>
         <maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
+        <project.root.version>${version}</project.root.version>
+        <!-- springboot版本 -->
+        <springboot.version>${project.parent.version}</springboot.version>
         <!-- cloud版本 -->
         <!-- 兼容版本查看 https://start.spring.io/actuator/info -->
         <spring.cloud.version>2023.0.1</spring.cloud.version>
-        <!-- 兼容版本查看 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.74801d288NNJdG -->
         <!-- aliCloud的版本要和cloud的兼容 -->
+        <!-- 兼容版本查看 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.74801d288NNJdG -->
         <spring.ali.cloud.version>2023.0.1.0</spring.ali.cloud.version>
-        <!--第三方包引入版本定义-->
-        <dubbo.version>3.2.10</dubbo.version>
-        <druid.version>1.1.10</druid.version>
-        <jsr305.version>3.0.2</jsr305.version>
-        <hutool.version>5.8.26</hutool.version>
-        <commons-collections4.version>4.3</commons-collections4.version>
-        <guava.version>32.0.0-android</guava.version>
-        <hibernate-type.version>2.17.3</hibernate-type.version>
-        <sa-token.version>1.39.0</sa-token.version>
-        <cglib.version>3.3.0</cglib.version>
-        <commons-compress.version>1.26.0</commons-compress.version>
-        <tukaani-xz.version>1.9</tukaani-xz.version>
-        <rocketmq.version>4.9.4</rocketmq.version>
-        <kafka.build.version>2.2.6.RELEASE</kafka.build.version>
+
         <!-- 插件版本-->
         <plugin.maven-compiler-plugin>3.10.1</plugin.maven-compiler-plugin>
         <plugin.maven-surefire-plugin>3.0.0-M7</plugin.maven-surefire-plugin>
@@ -53,6 +45,23 @@
         <plugin.maven-deploy-plugin>3.0.0</plugin.maven-deploy-plugin>
         <plugin.versions-maven-plugin>2.7</plugin.versions-maven-plugin>
         <plugin.jasypt-maven-plugin>3.0.0</plugin.jasypt-maven-plugin>
+
+        <!--第三方包引入版本定义-->
+        <dubbo.version>3.2.10</dubbo.version>
+        <druid.version>1.1.10</druid.version>
+        <jsr305.version>3.0.2</jsr305.version>
+        <commons-collections4.version>4.3</commons-collections4.version>
+        <guava.version>32.0.0-android</guava.version>
+        <hibernate-type.version>2.17.3</hibernate-type.version>
+        <cglib.version>3.3.0</cglib.version>
+        <commons-compress.version>1.26.0</commons-compress.version>
+        <tukaani-xz.version>1.9</tukaani-xz.version>
+        <rocketmq.version>4.9.4</rocketmq.version>
+        <kafka.build.version>2.2.6.RELEASE</kafka.build.version>
+        <caffeine.version>3.1.8</caffeine.version>
+        <hutool.version>5.8.26</hutool.version>
+        <sa-token.version>1.39.0</sa-token.version>
+
     </properties>
 
     <dependencyManagement>
@@ -157,16 +166,16 @@
                 <version>${junit.version}</version>
             </dependency>
             <!-- sa-token -->
-            <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-spring-boot-starter</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.dev33</groupId>
-                <artifactId>sa-token-redis-jackson</artifactId>
-                <version>${sa-token.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>cn.dev33</groupId>-->
+<!--                <artifactId>sa-token-spring-boot-starter</artifactId>-->
+<!--                <version>${sa-token.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>cn.dev33</groupId>-->
+<!--                <artifactId>sa-token-redis-jackson</artifactId>-->
+<!--                <version>${sa-token.version}</version>-->
+<!--            </dependency>-->
             <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
             <dependency>
                 <groupId>com.github.ben-manes.caffeine</groupId>
@@ -201,6 +210,7 @@
                 <artifactId>spring-kafka</artifactId>
                 <version>${kafka.build.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

@@ -15,7 +15,7 @@ public class Lists {
 
     }
 
-    public static <T> List<T> newArrayList() {
+    private static <T> List<T> newArrayList() {
         return new ArrayList<>();
     }
 

@@ -8,7 +8,6 @@
         <artifactId>Dwei</artifactId>
         <version>1.0</version>
     </parent>
-    <groupId>com.dwei.common</groupId>
     <artifactId>dwei-common</artifactId>
     <packaging>jar</packaging>
 

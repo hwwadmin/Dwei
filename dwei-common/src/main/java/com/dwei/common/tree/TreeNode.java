@@ -1,10 +1,10 @@
 package com.dwei.common.tree;
 
 import cn.hutool.core.lang.Assert;
+import com.dwei.common.utils.Lists;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.Collections;
 import java.util.List;
@@ -76,7 +76,7 @@ public class TreeNode<T> {
      * 获取父节点链路 (不包含自身)
      */
     public List<TreeNode<T>> getParentChain() {
-        List<TreeNode<T>> result = Lists.newArrayList();
+        List<TreeNode<T>> result = Lists.of();
         buildParentChain(this, result);
         return result;
     }
@@ -125,7 +125,7 @@ public class TreeNode<T> {
      * 获取节点的所有树图子节点
      */
     public List<TreeNode<T>> findAllChildren() {
-        List<TreeNode<T>> result = Lists.newArrayList();
+        List<TreeNode<T>> result = Lists.of();
         buildAllChildren(this, result);
         return result;
     }
@@ -143,7 +143,7 @@ public class TreeNode<T> {
      */
     public List<TreeNode<T>> flat() {
         TreeNode<T> root = findRoot();
-        List<TreeNode<T>> result = Lists.newArrayList();
+        List<TreeNode<T>> result = Lists.of();
         result.add(root);
         result.addAll(root.findAllChildren());
         return result;

@@ -15,8 +15,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -79,7 +77,7 @@ public abstract class JsonUtils {
      */
     public static List<Map<String, Object>> jsonStr2List(String jsonString) {
         if (ObjectUtils.isNull(jsonString)) {
-            return Lists.newArrayList();
+            return Lists.of();
         }
         try {
             //noinspection unchecked
@@ -94,7 +92,7 @@ public abstract class JsonUtils {
      */
     public static <T> List<T> jsonStr2List(String jsonString, Class<T> clazz) {
         if (ObjectUtils.isNull(jsonString)) {
-            return Lists.newArrayList();
+            return Lists.of();
         }
         try {
             JavaType javaType = objectMapper.getTypeFactory().constructParametricType(List.class, clazz);
@@ -109,7 +107,7 @@ public abstract class JsonUtils {
      */
     public static Map<String, Object> jsonStr2Map(String jsonString) {
         if (ObjectUtils.isNull(jsonString)) {
-            return Maps.newHashMap();
+            return Maps.of();
         }
         try {
             //noinspection unchecked
