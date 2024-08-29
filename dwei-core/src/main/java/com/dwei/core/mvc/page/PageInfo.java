@@ -1,4 +1,4 @@
-package com.dwei.core.page;
+package com.dwei.core.mvc.page;
 
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.common.utils.StringUtils;

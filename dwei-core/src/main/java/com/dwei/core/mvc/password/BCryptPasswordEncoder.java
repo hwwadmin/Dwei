@@ -1,4 +1,4 @@
-package com.dwei.core.password;
+package com.dwei.core.mvc.password;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,4 +1,4 @@
-package com.dwei.core.pojo.request;
+package com.dwei.core.mvc.pojo.request;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

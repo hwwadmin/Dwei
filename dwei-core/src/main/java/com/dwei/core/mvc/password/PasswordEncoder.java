@@ -1,4 +1,4 @@
-package com.dwei.core.password;
+package com.dwei.core.mvc.password;
 
 /**
  * 密码加密接口

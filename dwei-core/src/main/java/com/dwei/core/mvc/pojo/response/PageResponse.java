@@ -1,4 +1,4 @@
-package com.dwei.core.pojo.response;
+package com.dwei.core.mvc.pojo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

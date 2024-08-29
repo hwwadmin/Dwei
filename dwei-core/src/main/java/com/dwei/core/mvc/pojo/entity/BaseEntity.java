@@ -1,4 +1,4 @@
-package com.dwei.core.pojo.entity;
+package com.dwei.core.mvc.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.dwei.common.utils.IdUtils;

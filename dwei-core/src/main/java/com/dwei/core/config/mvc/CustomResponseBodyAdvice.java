@@ -4,7 +4,7 @@ import com.dwei.common.enums.StatusCodeEnum;
 import com.dwei.common.result.Response;
 import com.dwei.core.annotation.WrapResponseIgnore;
 import com.dwei.core.config.exception.GlobalExceptionHandler;
-import com.dwei.core.pojo.response.ListResponse;
+import com.dwei.core.mvc.pojo.response.ListResponse;
 import lombok.NonNull;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.core.MethodParameter;

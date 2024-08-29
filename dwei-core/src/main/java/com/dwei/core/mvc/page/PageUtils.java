@@ -1,4 +1,4 @@
-package com.dwei.core.page;
+package com.dwei.core.mvc.page;
 
 import com.dwei.common.constants.WebFrameworkConstants;
 import com.dwei.common.exception.UtilsException;

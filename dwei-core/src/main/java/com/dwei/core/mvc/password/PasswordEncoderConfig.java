@@ -1,4 +1,4 @@
-package com.dwei.core.password;
+package com.dwei.core.mvc.password;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

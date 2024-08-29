@@ -1,4 +1,4 @@
-package com.dwei.core.password;
+package com.dwei.core.mvc.password;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
