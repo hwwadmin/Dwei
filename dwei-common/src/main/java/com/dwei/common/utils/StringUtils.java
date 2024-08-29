@@ -51,8 +51,18 @@ public abstract class StringUtils {
         return cn.hutool.core.util.StrUtil.format(template, params);
     }
 
-    public static String toCamelCase(CharSequence name) {
-        return cn.hutool.core.util.StrUtil.toCamelCase(name);
+    /**
+     * 将下划线方式命名的字符串转换为驼峰式
+     */
+    public static String toCamelCase(CharSequence str) {
+        return cn.hutool.core.util.StrUtil.toCamelCase(str);
+    }
+
+    /**
+     * 将驼峰式命名的字符串转换为下划线方式
+     */
+    public static String toUnderlineCase(CharSequence str) {
+        return cn.hutool.core.util.StrUtil.toUnderlineCase(str);
     }
 
 }

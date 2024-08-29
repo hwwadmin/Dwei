@@ -64,6 +64,8 @@
         <sa-token.version>1.39.0</sa-token.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mybatis-plus-join.version>1.4.10</mybatis-plus-join.version>
+        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
+        <oshi.version>6.4.8</oshi.version>
 
     </properties>
 
@@ -219,7 +221,6 @@
                 <artifactId>spring-kafka</artifactId>
                 <version>${kafka.build.version}</version>
             </dependency>
-
             <!-- mybatis-plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -230,6 +231,18 @@
                 <groupId>com.github.yulichang</groupId>
                 <artifactId>mybatis-plus-join-boot-starter</artifactId>
                 <version>${mybatis-plus-join.version}</version>
+            </dependency>
+            <!-- pagehelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+            <!-- 获取系统信息 -->
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
             </dependency>
 
         </dependencies>
