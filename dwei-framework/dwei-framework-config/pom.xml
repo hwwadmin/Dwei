@@ -5,15 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dwei</groupId>
-        <artifactId>Dwei</artifactId>
+        <artifactId>dwei-framework</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>dwei-framework</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>dwei-framework-dict</module>
-        <module>dwei-framework-auth</module>
-        <module>dwei-framework-config</module>
-    </modules>
+    <artifactId>dwei-framework-config</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- dwei -->
+        <dependency>
+            <groupId>com.dwei</groupId>
+            <artifactId>dwei-core</artifactId>
+            <version>${project.root.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
