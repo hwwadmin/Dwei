@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: yomi-boot
+  profiles:
+    active: common,dev

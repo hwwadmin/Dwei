@@ -8,6 +8,7 @@
         <module>dwei-common</module>
         <module>dwei-core</module>
         <module>dwei-framework</module>
+        <module>dwei-admin</module>
     </modules>
     <packaging>pom</packaging>
 

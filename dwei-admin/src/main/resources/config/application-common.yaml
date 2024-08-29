@@ -1,0 +1,171 @@
+########################################
+## 该配置文件为通用配置，一般无需修改
+########################################
+server:
+  # HTTP设置
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+  maxHttpHeaderSize: 8192
+  # 压缩配置
+  compression:
+    enabled: true
+    mime-types: application/json,text/javascript,application/javascript,application/x-javascript,application/xml,text/html,text/xml,text/plain,image/jpeg,image/gif,image/x-icon
+    min-response-size: 2048
+  # tomcat配置
+  tomcat:
+    #当所有可能的请求处理线程都在使用时，传入连接请求的最大队列长度
+    acceptCount: 200
+    # tomcat线程池配置
+    threads:
+      max: 50
+      min-spare: 20
+    remoteip:
+      remote-ip-header: X-FORWARDED-FOR
+    uriEncoding: UTF-8
+    # 自定义临时文件存放目录
+    basedir: ./tmp/${spring.application.name}/tomcat_tmp
+    accesslog:
+      enabled: false
+      directory: logs
+      prefix: server
+      buffered: true
+      requestAttributesEnabled: false
+      fileDateFormat: -yyyyMMdd
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+  session:
+    timeout: 1200S
+    store-type: redis
+  main:
+    banner-mode: log
+  output:
+    ansi:
+      enabled: DETECT
+  # JPA 设置
+  jpa:
+    show-sql: false
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    repositories:
+      bootstrap-mode: deferred
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        jdbc:
+          batch_size: 500
+        order_inserts: true
+        order_updates: true
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+  # redis
+  redis:
+    database: 0
+    timeout: 3s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-wait: 1
+        max-active: 8
+  #      cluster:
+  #        refresh:
+  #          period: 10s
+  #          adaptive: true
+  # db
+  datasource:
+    druid:
+      name: masterDs
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      # 连接池配置
+      # 连接池初始化连接数
+      initialSize: 15
+      # 连接池最小连接数
+      minIdle: 15
+      # 连接池最大连接数
+      maxActive: 30
+      # 获取连接时最大等待时间，单位毫秒
+      maxWait: 6000
+      # 判断空闲连接间隔时间，单位毫秒
+      timeBetweenEvictionRunsMillis: 6000
+      # 连接在连接池中的最小生命周期，单位毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 用来检测连接是否有效的sql语句，必须是select
+      validationQuery: SELECT 'x'
+      # 检测连接是否有效的超时时间，单位秒
+      validationQueryTimeout: 10
+      # 是否进行如果空闲时间大于timeBetweenEvictionRunsMillis检测连接是否有效
+      testWhileIdle: true
+      # 是否进行申请连接的时候检测连接是否有效
+      testOnBorrow: false
+      # 是否进行归还连接的时候检测连接是否有效
+      testOnReturn: false
+      # 是否缓存preparedStatement，MYSQL下建议关闭，ORACLE建议开启
+      poolPreparedStatements: false
+      # PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: -1
+      # 是否强制性回收超时的连接
+      # 设置这个值的时候需要注意 如果你的连接操作需要很长时间，那么需要关闭这个设置或增加连接强制回收时间
+      removeAbandoned: true
+      # 连接强制回收时间，单位秒
+      removeAbandonedTimeout: 1800
+      # Filter配置
+      filters: stat,wall,slf4j
+      filter:
+        stat:
+          # 开启SQL合并和慢查询统计功能
+          merge-sql: true
+          slow-sql-millis: 2000
+      # 配置StatFilter
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/${spring.datasource.druid.name}/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+        profile-enable: true
+      # StatViewServlet
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/${spring.datasource.druid.name}/*
+        reset-enable: false
+        login-username: admin
+        login-password: 123456
+        # IP白名单，这里默认只允许当前PC查看
+        allow: 127.0.0.1
+
+# 日志设置
+logging:
+  config: classpath:config/log/log4j2-dev.xml
+  register-shutdown-hook: true
+  level:
+    root: info
+    org: info
+    com: info
+    org.apache.dubbo: info
+    com.yomi: debug
+
+# 加密设置
+jasypt:
+  encryptor:
+    bean: standardConfigEncryptor
+
+# spring-boot-actuator 监控组件管理配置
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: health,info

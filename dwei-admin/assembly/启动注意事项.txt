@@ -1,0 +1,11 @@
+1.如果出现 module java.base does not “opens java.lang“ to unnamed module 类似的错误，请在jvm启动项添加以下参数
+--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+如果出现其他错误，例如
+module java.base does not “opens java.io” to unnamed module
+module java.base does not “opens java.util” to unnamed module
+module java.base does not "opens java.math" to unnamed module
+继续增加vm参数
+--add-opens java.base/java.io=ALL-UNNAMED
+--add-opens java.base/java.util=ALL-UNNAMED
+--add-opens java.base/java.math=ALL-UNNAMED
+
