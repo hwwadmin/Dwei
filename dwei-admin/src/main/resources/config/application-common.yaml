@@ -8,7 +8,7 @@ server:
       enabled: true
       charset: UTF-8
       force: true
-  maxHttpHeaderSize: 8192
+  max-http-request-header-size: 8192
   # 压缩配置
   compression:
     enabled: true
@@ -52,40 +52,6 @@ spring:
   output:
     ansi:
       enabled: DETECT
-  # JPA 设置
-  jpa:
-    show-sql: false
-    open-in-view: false
-    database-platform: org.hibernate.dialect.MySQL5Dialect
-    repositories:
-      bootstrap-mode: deferred
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-        jdbc:
-          batch_size: 500
-        order_inserts: true
-        order_updates: true
-  data:
-    web:
-      pageable:
-        one-indexed-parameters: true
-  # redis
-  redis:
-    database: 0
-    timeout: 3s
-    lettuce:
-      pool:
-        min-idle: 0
-        max-idle: 8
-        max-wait: 1
-        max-active: 8
-  #      cluster:
-  #        refresh:
-  #          period: 10s
-  #          adaptive: true
   # db
   datasource:
     druid:
@@ -145,6 +111,11 @@ spring:
         login-password: 123456
         # IP白名单，这里默认只允许当前PC查看
         allow: 127.0.0.1
+  data:
+    # redis
+    redis:
+      database: 0
+      timeout: 3s
 
 # 日志设置
 logging:
@@ -155,7 +126,7 @@ logging:
     org: info
     com: info
     org.apache.dubbo: info
-    com.yomi: debug
+    com.dwei: debug
 
 # 加密设置
 jasypt:
@@ -169,3 +140,28 @@ management:
     web:
       exposure:
         include: health,info
+
+# Sa-Token
+sa-token:
+  # 自定义分组属性
+  group: dwei_admin
+  # http header 中，从 Authorization 中获取 tokenValue
+  token-name: DWEI_TOKEN
+  # token 过期时间 30 天
+  timeout: 2592000
+  # 不过期
+  active-timeout: -1
+  # token 过期时间自动续期
+  auto-renew: true
+  # 是否允许同一账号并发登录 （为 true 时允许一起登录，为 false 时新登录挤掉旧登录）
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  is-share: true
+  # 不打印操作日志
+  is-log: false
+  # 初始化配置时不打印版本字符画
+  isPrint: false
+  # 是否从 cookie 中获取 tokenValue
+  is-read-cookie: false
+  # 是否从 body 中获取 tokenValue
+  is-read-body: false

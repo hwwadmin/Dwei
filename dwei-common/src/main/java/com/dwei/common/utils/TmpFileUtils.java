@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class TmpFileUtils {
 
-    private static final String DEFAULT_PREFIX = "yomi_tmp#";
+    private static final String DEFAULT_PREFIX = "dwei_tmp#";
     private static final String DEFAULT_SUFFIX = ".tmp";
 
     public static File createTmpFile() {

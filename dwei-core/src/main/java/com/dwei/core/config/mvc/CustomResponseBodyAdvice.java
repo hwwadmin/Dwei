@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-@ControllerAdvice(basePackages = "com.yomi")
+@ControllerAdvice(basePackages = "com.dwei")
 public class CustomResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     @Override

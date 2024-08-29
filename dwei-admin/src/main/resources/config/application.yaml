@@ -1,5 +1,5 @@
 spring:
   application:
-    name: yomi-boot
+    name: dwei-admin
   profiles:
     active: common,dev
