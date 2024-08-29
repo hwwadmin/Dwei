@@ -8,7 +8,8 @@
         <artifactId>Dwei</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>dwei.frame</artifactId>
+    <artifactId>dwei-framework</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- dwei -->
