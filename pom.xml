@@ -9,6 +9,8 @@
         <module>dwei-core</module>
         <module>dwei-framework</module>
         <module>dwei-admin</module>
+        <module>dwei-admin/dwei-admin-start</module>
+        <module>dwei-admin/dwei-admin-user</module>
     </modules>
     <packaging>pom</packaging>
 

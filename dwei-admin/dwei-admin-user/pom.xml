@@ -5,14 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dwei</groupId>
-        <artifactId>Dwei</artifactId>
+        <artifactId>dwei-admin</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>dwei-admin</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>dwei-admin-user</module>
-        <module>dwei-admin-start</module>
-    </modules>
+    <artifactId>dwei-admin-user</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- dwei -->
+        <dependency>
+            <groupId>com.dwei</groupId>
+            <artifactId>dwei-framework-auth</artifactId>
+            <version>${project.root.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

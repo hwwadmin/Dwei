@@ -1,4 +1,4 @@
-package com.dwei.admin;
+package com.dwei.admin.start;
 
 import com.dwei.core.guide.ApplicationBoot;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
