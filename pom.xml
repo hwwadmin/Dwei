@@ -7,6 +7,7 @@
     <modules>
         <module>dwei-common</module>
         <module>dwei-core</module>
+        <module>dwei.frame</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -62,7 +63,7 @@
         <caffeine.version>3.1.8</caffeine.version>
         <hutool.version>5.8.26</hutool.version>
         <sa-token.version>1.39.0</sa-token.version>
-        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <mybatis-plus-join.version>1.4.10</mybatis-plus-join.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <oshi.version>6.4.8</oshi.version>
