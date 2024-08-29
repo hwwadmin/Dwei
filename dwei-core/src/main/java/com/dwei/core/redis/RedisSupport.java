@@ -2,6 +2,7 @@ package com.dwei.core.redis;
 
 import com.dwei.core.redis.sorted.*;
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,8 +22,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisSupport {
 
-    private final RedisTemplate<String, Object> redisTemplate;
-    private final StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     private StringRedisSupport ops4str;
     private HashRedisSupport ops4hash;
@@ -31,11 +34,6 @@ public class RedisSupport {
     private ZSetRedisSupport ops4zset;
     private SpecialOpsRedisSupport ops4special;
     private BloomFilterRedisSupport bloomFilter;
-
-    public RedisSupport(RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
-        this.redisTemplate = redisTemplate;
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
 
     @PostConstruct
     public void init() {
