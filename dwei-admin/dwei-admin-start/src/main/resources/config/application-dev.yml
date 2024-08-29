@@ -75,6 +75,9 @@ spring:
 #      bean-name: com.yomi.boot.framework.mq.rocketmq.DefaultRocketMqConsumerCallback
 
 dwei:
+  path:
+    ignore:
+      - /**/user/login/**
   boot:
     logs: crashLog
     rbac-check-auth: rbacCheckDefault

@@ -5,6 +5,7 @@ import com.dwei.core.config.interceptor.InterceptorInfo;
 import com.dwei.core.config.interceptor.InterceptorRegister;
 import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.List;
 @Slf4j
 public class SaTokenInterceptorRegister implements InterceptorRegister {
 
+    @Value("${dwei.path.ignore}")
+    private List<String> notMatchConfig;
+
     private final SaTokenInterceptor interceptor;
 
     // 只设置可能需要的静态文件，如果是接口需要开放使用注解 @SaIgnore
@@ -28,7 +32,6 @@ public class SaTokenInterceptorRegister implements InterceptorRegister {
             .add("*.png")
             .add("*.jpg")
             .add("*.jpeg")
-            .add("/**/user/login/**")
             .build();
 
     public SaTokenInterceptorRegister(SaTokenInterceptor interceptor) {
@@ -38,12 +41,18 @@ public class SaTokenInterceptorRegister implements InterceptorRegister {
     @Override
     public List<InterceptorInfo> getInterceptorInfos() {
         List<InterceptorInfo> interceptorInfos = Lists.of();
+
+        // 忽略校验的路径
+        List<String> ignorePathList = Lists.of();
+        ignorePathList.addAll(notMatchList);
+        ignorePathList.addAll(notMatchConfig);
+
         interceptorInfos.add(InterceptorInfo.builder()
                 .name("SaInterceptor")
                 .instance(interceptor)
                 .order(1)
                 .pathPatterns(Lists.of("/**"))
-                .excludePathPatterns(notMatchList)
+                .excludePathPatterns(ignorePathList)
                 .build());
         return interceptorInfos;
     }
