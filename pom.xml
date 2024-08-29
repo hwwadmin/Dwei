@@ -178,16 +178,16 @@
                 <version>${junit.version}</version>
             </dependency>
             <!-- sa-token -->
-<!--            <dependency>-->
-<!--                <groupId>cn.dev33</groupId>-->
-<!--                <artifactId>sa-token-spring-boot-starter</artifactId>-->
-<!--                <version>${sa-token.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>cn.dev33</groupId>-->
-<!--                <artifactId>sa-token-redis-jackson</artifactId>-->
-<!--                <version>${sa-token.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
             <dependency>
                 <groupId>com.github.ben-manes.caffeine</groupId>
