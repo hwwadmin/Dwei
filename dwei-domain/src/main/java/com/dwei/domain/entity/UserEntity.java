@@ -6,9 +6,11 @@ import java.io.Serializable;
 
 import com.dwei.common.enums.SexEnum;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 用户表
@@ -16,7 +18,9 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value ="s_user")
 @Data
-@Accessors(chain = true)
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity extends BaseEntity implements Serializable {
 
     /**

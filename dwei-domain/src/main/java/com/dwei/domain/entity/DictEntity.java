@@ -5,11 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
-import com.dwei.common.enums.YesNoEnum;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 字典类型表
@@ -17,7 +18,9 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "s_dict")
 @Data
-@Accessors(chain = true)
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DictEntity extends BaseEntity implements Serializable {
 
     /**
@@ -38,7 +41,7 @@ public class DictEntity extends BaseEntity implements Serializable {
     /**
      * 是否启用
      */
-    private YesNoEnum enable;
+    private Boolean enable;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

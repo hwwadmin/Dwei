@@ -45,11 +45,12 @@ public class AdminUserService {
             Assert.isFalse(userRepository.lambdaQuery().eq(UserEntity::getPhone, request.getPhone()).exists());
 
         var pwd = passwordEncoder.encode(request.getPassword());
-        var user = new UserEntity()
-                .setUsername(request.getUsername())
-                .setPassword(pwd)
-                .setPhone(request.getPhone())
-                .setSex(request.getSex());
+        var user = UserEntity.builder()
+                .username(request.getUsername())
+                .password(pwd)
+                .phone(request.getPhone())
+                .sex(request.getSex())
+                .build();
         user.init();
         userRepository.save(user);
     }

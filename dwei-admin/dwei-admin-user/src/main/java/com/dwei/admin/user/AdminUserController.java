@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/dwei/admin/user")
+@RequestMapping("/admin/user")
 public class AdminUserController {
 
     private final AdminUserService adminUserService;

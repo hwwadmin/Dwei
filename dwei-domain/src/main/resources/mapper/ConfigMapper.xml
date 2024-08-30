@@ -9,8 +9,8 @@
             <result property="name" column="name"/>
             <result property="key" column="key"/>
             <result property="value" column="value"/>
-            <result property="isSystem" column="is_system" javaType="com.dwei.common.enums.YesNoEnum"/>
-            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="isSystem" column="is_system"/>
+            <result property="remark" column="remark"/>
             <result property="createTime" column="create_time"/>
             <result property="updateTime" column="update_time"/>
             <result property="deleteTime" column="delete_time"/>

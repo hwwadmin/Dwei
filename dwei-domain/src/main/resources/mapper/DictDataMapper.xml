@@ -11,7 +11,7 @@
             <result property="label" column="label"/>
             <result property="labelEn" column="label_en"/>
             <result property="value" column="value"/>
-            <result property="enable" column="enable" javaType="com.dwei.common.enums.YesNoEnum"/>
+            <result property="enable" column="enable"/>
             <result property="createTime" column="create_time"/>
             <result property="updateTime" column="update_time"/>
             <result property="deleteTime" column="delete_time"/>
