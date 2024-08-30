@@ -23,7 +23,7 @@ public class AdminUserService {
                 .eq(UserEntity::getUsername, request.getUsername())
                 .one();
         Assert.nonNull(user);
-        Assert.isTrue(passwordEncoder.checkPw(user.getPassword(), request.getPassword()));
+        Assert.isTrue(passwordEncoder.checkPw(request.getPassword(), user.getPassword()));
 
         var token = AuthUtils.getTokenApi().createToken(user.getId());
 
