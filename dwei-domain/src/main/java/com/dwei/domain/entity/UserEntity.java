@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
+import com.dwei.common.enums.SexEnum;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 用户表
@@ -14,6 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value ="s_user")
 @Data
+@Accessors(chain = true)
 public class UserEntity extends BaseEntity implements Serializable {
 
     /**
@@ -49,7 +52,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     /**
      * 性别
      */
-    private String sex;
+    private SexEnum sex;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

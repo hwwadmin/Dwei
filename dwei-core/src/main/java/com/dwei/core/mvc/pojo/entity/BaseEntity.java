@@ -35,15 +35,20 @@ public abstract class BaseEntity implements Serializable {
     private Instant deleteTime;
 
     @JsonIgnore
-    public void initId() {
-        if (Objects.isNull(this.id)) this.id = IdUtils.nextId();
+    public void init() {
+        initId();
+        initCreateTime();
+        this.updateTime = Instant.now();
     }
 
     @JsonIgnore
     public void update() {
-        initId();
-        initCreateTime();
         this.updateTime = Instant.now();
+    }
+
+    @JsonIgnore
+    public void initId() {
+        if (Objects.isNull(this.id)) this.id = IdUtils.nextId();
     }
 
     @JsonIgnore

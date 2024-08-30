@@ -1,5 +1,6 @@
 package com.dwei.admin.user.service;
 
+import com.dwei.admin.user.domain.request.UserRegisterRequest;
 import com.dwei.admin.user.domain.response.TokenResponse;
 import com.dwei.admin.user.domain.response.UserInfoResponse;
 import com.dwei.domain.entity.UserEntity;
@@ -35,6 +36,17 @@ public class AdminUserService {
 
     public void logout() {
         AuthUtils.getTokenApi().logout();
+    }
+
+    public void register(UserRegisterRequest request) {
+        var pwd = passwordEncoder.encode(request.getPassword());
+        var user = new UserEntity()
+                .setUsername(request.getUsername())
+                .setPassword(pwd)
+                .setPhone(request.getPhone())
+                .setSex(request.getSex());
+        user.init();
+        userRepository.save(user);
     }
 
     public UserInfoResponse userInfo() {

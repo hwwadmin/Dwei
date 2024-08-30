@@ -1,5 +1,6 @@
 package com.dwei.admin.user.domain.response;
 
+import com.dwei.common.enums.SexEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,6 +42,6 @@ public class UserInfoResponse {
     /**
      * 性别
      */
-    private String sex;
+    private SexEnum sex;
 
 }
