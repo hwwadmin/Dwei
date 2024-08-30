@@ -54,22 +54,20 @@
         <dubbo.version>3.2.10</dubbo.version>
         <druid.version>1.2.8</druid.version>
         <mysql.version>8.0.31</mysql.version>
-        <jsr305.version>3.0.2</jsr305.version>
-        <commons-collections4.version>4.3</commons-collections4.version>
-        <guava.version>32.0.0-android</guava.version>
-        <hibernate-type.version>2.17.3</hibernate-type.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <guava.version>33.3.0-jre</guava.version>
         <cglib.version>3.3.0</cglib.version>
         <commons-compress.version>1.26.0</commons-compress.version>
         <tukaani-xz.version>1.9</tukaani-xz.version>
-        <rocketmq.version>4.9.4</rocketmq.version>
-        <kafka.build.version>2.2.6.RELEASE</kafka.build.version>
+        <rocketmq.version>2.3.0</rocketmq.version>
+        <kafka.build.version>3.2.0</kafka.build.version>
         <caffeine.version>3.1.8</caffeine.version>
         <hutool.version>5.8.26</hutool.version>
         <sa-token.version>1.39.0</sa-token.version>
         <mybatis-plus.version>3.5.6</mybatis-plus.version>
         <mybatis-plus-join.version>1.4.10</mybatis-plus-join.version>
         <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
-        <oshi.version>6.4.8</oshi.version>
+        <oshi.version>6.6.3</oshi.version>
 
     </properties>
 
@@ -115,12 +113,6 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
-            <!-- jsr305 -->
-            <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>${jsr305.version}</version>
-            </dependency>
             <!-- hutool -->
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -161,12 +153,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <!-- hibernate-types -->
-            <dependency>
-                <groupId>com.vladmihalcea</groupId>
-                <artifactId>hibernate-types-52</artifactId>
-                <version>${hibernate-type.version}</version>
             </dependency>
             <!-- cglib -->
             <dependency>
@@ -211,12 +197,7 @@
             <!-- rocketmq -->
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-client</artifactId>
-                <version>${rocketmq.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-acl</artifactId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${rocketmq.version}</version>
             </dependency>
             <!-- kafka -->
