@@ -28,7 +28,7 @@ public abstract class AuthUtils {
     }
 
     public static Long getUserId() {
-        return tokenApi.getUserId();
+        return getTokenApi().getUserId();
     }
 
 }

@@ -1,13 +1,13 @@
 package com.dwei.admin.user.service;
 
 import com.dwei.admin.user.domain.response.TokenResponse;
+import com.dwei.admin.user.domain.response.UserInfoResponse;
 import com.dwei.domain.entity.UserEntity;
 import com.dwei.domain.repository.IUserRepository;
 import com.dwei.admin.user.domain.request.UserLoginRequest;
 import com.dwei.common.utils.Assert;
 import com.dwei.core.mvc.password.PasswordEncoder;
 import com.dwei.framework.auth.AuthUtils;
-import com.dwei.framework.auth.token.Token;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,28 @@ public class AdminUserService {
         return TokenResponse.builder()
                 .userId(token.getUserId())
                 .token(token.getToken())
+                .build();
+    }
+
+    public void logout() {
+        AuthUtils.getTokenApi().logout();
+    }
+
+    public UserInfoResponse userInfo() {
+        var user = userRepository.getById(AuthUtils.getUserId());
+        Assert.nonNull(user);
+        return toResponse(user);
+    }
+
+    private UserInfoResponse toResponse(UserEntity user) {
+        return UserInfoResponse.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .phone(user.getPhone())
+                .email(user.getEmail())
+                .name(user.getName())
+                .avatar(user.getAvatar())
+                .sex(user.getSex())
                 .build();
     }
 
