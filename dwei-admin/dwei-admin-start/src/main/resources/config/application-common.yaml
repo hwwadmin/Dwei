@@ -168,11 +168,13 @@ sa-token:
   # 自定义分组属性
   group: dwei_admin
   # http header 中，从 Authorization 中获取 tokenValue
-  token-name: DWEI_TOKEN
+  token-name: auth_token
   # token 过期时间 30 天
   timeout: 2592000
   # 不过期
   active-timeout: -1
+  # token风格 使用uuid风格, 只不过去掉了中划线
+  token-style: simple-uuid
   # token 过期时间自动续期
   auto-renew: true
   # 是否允许同一账号并发登录 （为 true 时允许一起登录，为 false 时新登录挤掉旧登录）
