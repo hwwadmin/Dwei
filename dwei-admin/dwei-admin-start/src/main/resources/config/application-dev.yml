@@ -76,8 +76,7 @@ spring:
 
 dwei:
   path:
-    ignore:
-      - /**/user/login/**
+    ignore: /**/user/login/**
   boot:
     logs: crashLog
     rbac-check-auth: rbacCheckDefault

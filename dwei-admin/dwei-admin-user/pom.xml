@@ -18,6 +18,11 @@
             <artifactId>dwei-framework-auth</artifactId>
             <version>${project.root.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.dwei</groupId>
+            <artifactId>dwei-core</artifactId>
+            <version>${project.root.version}</version>
+        </dependency>
 
     </dependencies>
 

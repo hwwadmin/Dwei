@@ -68,7 +68,7 @@
         <sa-token.version>1.39.0</sa-token.version>
         <mybatis-plus.version>3.5.6</mybatis-plus.version>
         <mybatis-plus-join.version>1.4.10</mybatis-plus-join.version>
-        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
+        <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
         <oshi.version>6.4.8</oshi.version>
 
     </properties>
