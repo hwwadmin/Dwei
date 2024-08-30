@@ -1,0 +1,50 @@
+package com.dwei.domain.entity;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+
+import com.dwei.common.enums.YesNoEnum;
+import com.dwei.core.mvc.pojo.entity.BaseEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+/**
+ * 系统参数配置表
+ */
+@EqualsAndHashCode(callSuper = true)
+@TableName(value ="s_config")
+@Data
+@Accessors(chain = true)
+public class ConfigEntity extends BaseEntity implements Serializable {
+
+    /**
+     * 参数名称
+     */
+    private String name;
+
+    /**
+     * 参数键
+     */
+    private String key;
+
+    /**
+     * 参数值
+     */
+    private String value;
+
+    /**
+     * 是否系统参数
+     */
+    private YesNoEnum isSystem;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+}

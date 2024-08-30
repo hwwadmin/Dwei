@@ -12,7 +12,7 @@
             <result property="password" column="password"/>
             <result property="name" column="name"/>
             <result property="avatar" column="avatar"/>
-            <result property="sex" column="sex"/>
+            <result property="sex" column="sex" javaType="com.dwei.common.enums.SexEnum"/>
             <result property="createTime" column="create_time"/>
             <result property="updateTime" column="update_time"/>
             <result property="deleteTime" column="delete_time"/>
