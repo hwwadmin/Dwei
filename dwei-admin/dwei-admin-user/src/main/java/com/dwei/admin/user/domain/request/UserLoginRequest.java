@@ -1,4 +1,4 @@
-package com.dwei.admin.user.request;
+package com.dwei.admin.user.domain.request;
 
 import com.dwei.core.annotation.StringTrim;
 import jakarta.validation.constraints.NotBlank;

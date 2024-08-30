@@ -1,4 +1,4 @@
-package com.dwei.admin.user.domain;
+package com.dwei.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value ="s_user")
 @Data
-public class User extends BaseEntity implements Serializable {
+public class UserEntity extends BaseEntity implements Serializable {
 
     /**
      * 用户名

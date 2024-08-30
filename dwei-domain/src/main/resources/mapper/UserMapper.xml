@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dwei.admin.user.mapper.UserMapper">
+<mapper namespace="com.dwei.domain.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.dwei.admin.user.domain.User">
+    <resultMap id="BaseResultMap" type="com.dwei.domain.entity.UserEntity">
             <id property="id" column="id"/>
             <result property="username" column="username"/>
             <result property="phone" column="phone"/>

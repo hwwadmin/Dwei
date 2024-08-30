@@ -11,6 +11,7 @@
         <module>dwei-admin</module>
         <module>dwei-admin/dwei-admin-start</module>
         <module>dwei-admin/dwei-admin-user</module>
+        <module>dwei-domain</module>
     </modules>
     <packaging>pom</packaging>
 
