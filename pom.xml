@@ -65,7 +65,7 @@
         <hutool.version>5.8.26</hutool.version>
         <sa-token.version>1.39.0</sa-token.version>
         <mybatis-plus.version>3.5.6</mybatis-plus.version>
-        <mybatis-plus-join.version>1.4.10</mybatis-plus-join.version>
+        <mybatis-plus-join.version>1.4.13</mybatis-plus-join.version>
         <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
         <oshi.version>6.6.3</oshi.version>
 
