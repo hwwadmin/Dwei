@@ -15,12 +15,7 @@
         <!-- dwei -->
         <dependency>
             <groupId>com.dwei</groupId>
-            <artifactId>dwei-framework-config</artifactId>
-            <version>${project.root.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dwei</groupId>
-            <artifactId>dwei-framework-dict</artifactId>
+            <artifactId>dwei-core</artifactId>
             <version>${project.root.version}</version>
         </dependency>
 

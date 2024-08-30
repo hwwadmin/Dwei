@@ -15,7 +15,7 @@
         <!-- dwei -->
         <dependency>
             <groupId>com.dwei</groupId>
-            <artifactId>dwei-core</artifactId>
+            <artifactId>dwei-domain</artifactId>
             <version>${project.root.version}</version>
         </dependency>
 
