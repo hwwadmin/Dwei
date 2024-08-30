@@ -5,6 +5,7 @@ import com.dwei.admin.user.domain.request.UserRegisterRequest;
 import com.dwei.admin.user.domain.response.TokenResponse;
 import com.dwei.admin.user.domain.response.UserInfoResponse;
 import com.dwei.admin.user.service.AdminUserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class AdminUserController {
      * 登录
      */
     @PostMapping("/login")
-    public TokenResponse login(@RequestBody UserLoginRequest request) {
+    public TokenResponse login(@Valid @RequestBody UserLoginRequest request) {
         return adminUserService.login(request);
     }
 
@@ -40,7 +41,7 @@ public class AdminUserController {
      * 用户注册
      */
     @PostMapping("/register")
-    public void register(@RequestBody UserRegisterRequest request) {
+    public void register(@Valid @RequestBody UserRegisterRequest request) {
         adminUserService.register(request);
     }
 

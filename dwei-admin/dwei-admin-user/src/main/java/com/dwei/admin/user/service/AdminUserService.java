@@ -3,6 +3,7 @@ package com.dwei.admin.user.service;
 import com.dwei.admin.user.domain.request.UserRegisterRequest;
 import com.dwei.admin.user.domain.response.TokenResponse;
 import com.dwei.admin.user.domain.response.UserInfoResponse;
+import com.dwei.common.utils.ObjectUtils;
 import com.dwei.domain.entity.UserEntity;
 import com.dwei.domain.repository.IUserRepository;
 import com.dwei.admin.user.domain.request.UserLoginRequest;
@@ -39,6 +40,10 @@ public class AdminUserService {
     }
 
     public void register(UserRegisterRequest request) {
+        Assert.isFalse(userRepository.lambdaQuery().eq(UserEntity::getUsername, request.getUsername()).exists());
+        if (ObjectUtils.nonNull(request.getPhone()))
+            Assert.isFalse(userRepository.lambdaQuery().eq(UserEntity::getPhone, request.getPhone()).exists());
+
         var pwd = passwordEncoder.encode(request.getPassword());
         var user = new UserEntity()
                 .setUsername(request.getUsername())
