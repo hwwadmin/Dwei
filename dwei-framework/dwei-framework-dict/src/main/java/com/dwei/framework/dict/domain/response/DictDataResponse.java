@@ -5,39 +5,42 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DictResponse {
+public class DictDataResponse {
 
     private Long id;
 
     /**
-     * 字典类型名称
-     */
-    private String name;
-
-    /**
      * 字典类型编码
      */
-    private String code;
+    private String dictCode;
 
     /**
-     * 备注
+     * 排序
      */
-    private String remark;
+    private Integer seq;
+
+    /**
+     * 标签
+     */
+    private String label;
+
+    /**
+     * 标签(英文)
+     */
+    private String labelEn;
+
+    /**
+     * 字典值
+     */
+    private String value;
 
     /**
      * 是否启用
      */
     private Boolean enable;
-
-    /**
-     * 字典数据
-     */
-    private List<DictDataResponse> dictData;
 
 }

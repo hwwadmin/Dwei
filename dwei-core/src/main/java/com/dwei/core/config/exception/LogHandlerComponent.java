@@ -14,6 +14,11 @@ import org.springframework.stereotype.Component;
 public class LogHandlerComponent implements ComponentService {
 
     @Override
+    public String getName() {
+        return "日志处理组件";
+    }
+
+    @Override
     public void start() {
         var logManager = SpringContextUtils.getBean(ExceptionHandlerLogManager.class);
         logManager.refresh();
@@ -22,11 +27,6 @@ public class LogHandlerComponent implements ComponentService {
     @Override
     public void stop() {
 
-    }
-
-    @Override
-    public String getName() {
-        return "日志处理启动组件";
     }
 
 }

@@ -6,6 +6,8 @@ import com.dwei.core.utils.RequestUtils;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Optional;
+
 /**
  * 分页工具类
  *
@@ -41,9 +43,11 @@ public abstract class PageUtils {
      * 获取分页参数对象
      */
     public static PageInfo getPageDomain() {
+        int pageNum = Optional.ofNullable(RequestUtils.getParameter(WebFrameworkConstants.PAGE_NUM)).map(Integer::parseInt).orElse(PAGE_NUM_START);
+        int pageSize = Optional.ofNullable(RequestUtils.getParameter(WebFrameworkConstants.PAGE_SIZE)).map(Integer::parseInt).orElse(PAGE_SIZE_LIMIT_MIN);
         return PageInfo.builder()
-                .pageNum(Integer.parseInt(RequestUtils.getParameter(WebFrameworkConstants.PAGE_NUM), 1))
-                .pageSize(Integer.parseInt(RequestUtils.getParameter(WebFrameworkConstants.PAGE_SIZE), 10))
+                .pageNum(pageNum)
+                .pageSize(pageSize)
                 .orderByColumn(RequestUtils.getParameter(WebFrameworkConstants.ORDER_BY_COLUMN))
                 .isAsc(RequestUtils.getParameter(WebFrameworkConstants.IS_ASC))
                 .build();

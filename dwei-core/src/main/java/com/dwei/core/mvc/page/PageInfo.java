@@ -38,7 +38,7 @@ public class PageInfo {
      * 构造排序
      */
     public String buildOrder() {
-        if (ObjectUtils.isNull(orderByColumn)) return "";
+        if (ObjectUtils.isNull(orderByColumn)) return "id desc";
         String orderField = StringUtils.toUnderlineCase(orderByColumn);
 
         // 单字段排序
