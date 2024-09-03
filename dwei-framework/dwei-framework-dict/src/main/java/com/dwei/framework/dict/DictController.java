@@ -54,4 +54,12 @@ public class DictController {
         dictService.addDictData(request);
     }
 
+    /**
+     * 强制刷新字典缓存
+     */
+    @PostMapping("/refresh")
+    public void refresh() {
+        dictService.refresh();
+    }
+
 }

@@ -91,6 +91,10 @@ public class DictService {
         DictUtils.refresh(dicData.getDictCode());
     }
 
+    public void refresh() {
+        DictUtils.refresh(true);
+    }
+
     private DictResponse convertResponse(DictEntity dict, Map<String, List<DictDataResponse>> dictDataGroup) {
         return convertResponse(dict, dictDataGroup.get(dict.getCode()));
     }
