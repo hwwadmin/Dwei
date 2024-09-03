@@ -1,9 +1,7 @@
 package com.dwei.framework.dict;
 
 import com.dwei.core.mvc.pojo.response.PageResponse;
-import com.dwei.framework.dict.domain.request.DictAddRequest;
-import com.dwei.framework.dict.domain.request.DictDataAddRequest;
-import com.dwei.framework.dict.domain.request.DictQueryRequest;
+import com.dwei.framework.dict.domain.request.*;
 import com.dwei.framework.dict.domain.response.DictResponse;
 import com.dwei.framework.dict.service.DictService;
 import jakarta.validation.Valid;
@@ -39,7 +37,7 @@ public class DictController {
     }
 
     /**
-     * 新增字典分类
+     * 新增字典类型
      */
     @PostMapping("/add")
     public void addDict(@Valid @RequestBody DictAddRequest request) {
@@ -52,6 +50,22 @@ public class DictController {
     @PostMapping("/data/add")
     public void addDictData(@Valid @RequestBody DictDataAddRequest request) {
         dictService.addDictData(request);
+    }
+
+    /**
+     * 更新字典类型
+     */
+    @PostMapping("/update")
+    public void updateDict(@Valid @RequestBody DictUpdateRequest request) {
+        dictService.updateDict(request);
+    }
+
+    /**
+     * 更新字典数据
+     */
+    @PostMapping("/data/update")
+    public void updateDictData(@Valid @RequestBody DictDataUpdateRequest request) {
+        dictService.updateDictData(request);
     }
 
     /**

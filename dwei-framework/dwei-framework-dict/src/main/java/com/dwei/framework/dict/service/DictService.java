@@ -11,9 +11,7 @@ import com.dwei.domain.query.dict.DictQuery;
 import com.dwei.domain.query.dictdata.DictDataQuery;
 import com.dwei.domain.repository.IDictDataRepository;
 import com.dwei.domain.repository.IDictRepository;
-import com.dwei.framework.dict.domain.request.DictAddRequest;
-import com.dwei.framework.dict.domain.request.DictDataAddRequest;
-import com.dwei.framework.dict.domain.request.DictQueryRequest;
+import com.dwei.framework.dict.domain.request.*;
 import com.dwei.framework.dict.domain.response.DictDataResponse;
 import com.dwei.framework.dict.domain.response.DictResponse;
 import com.dwei.framework.dict.utils.DictUtils;
@@ -89,6 +87,36 @@ public class DictService {
 
         dictDataRepository.save(dicData);
         DictUtils.refresh(dicData.getDictCode());
+    }
+
+    @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
+    public void updateDict(DictUpdateRequest request) {
+        var dict = dictRepository.getById(request.getId());
+        Assert.nonNull(dict);
+
+        dict.setName(request.getName());
+        dict.setRemark(request.getRemark());
+        dict.setEnable(request.getEnable());
+        dict.update();
+
+        dictRepository.saveOrUpdate(dict);
+        DictUtils.refresh(dict.getCode());
+    }
+
+    @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
+    public void updateDictData(DictDataUpdateRequest request) {
+        var dictData = dictDataRepository.getById(request.getId());
+        Assert.nonNull(dictData);
+
+        dictData.setSeq(request.getSeq());
+        dictData.setLabel(request.getLabel());
+        dictData.setLabelEn(request.getLabelEn());
+        dictData.setValue(request.getValue());
+        dictData.setEnable(request.getEnable());
+        dictData.update();
+
+        dictDataRepository.saveOrUpdate(dictData);
+        DictUtils.refresh(dictData.getDictCode());
     }
 
     public void refresh() {
