@@ -52,6 +52,7 @@ public class DictService {
 
     public DictResponse code(String code) {
         var dict = DictUtils.get(code);
+        Assert.nonNull(dict.getFirst(), "不存在的字典类型");
         return convertResponse(dict.getFirst(), Lists.map(dict.getSecond(), this::convertResponse));
     }
 

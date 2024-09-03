@@ -14,6 +14,7 @@ import com.dwei.framework.dict.DictConstant;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 字典工具类
@@ -46,8 +47,8 @@ public abstract class DictUtils {
         IDictRepository dictRepository = SpringContextUtils.getBean(IDictRepository.class);
         IDictDataRepository dictDataRepository = SpringContextUtils.getBean(IDictDataRepository.class);
 
-        var dict = dictRepository.list();
-        var dictData = dictDataRepository.list();
+        var dict = dictRepository.lambdaQuery().eq(DictEntity::getEnable, true).list();
+        var dictData = dictDataRepository.lambdaQuery().eq(DictDataEntity::getEnable, true).list();
 
         RedisUtils.support().deleteKeysByPattern(DictConstant.DICT_CACHE_All_PATTER);
         RedisUtils.support().getOps4str().set(DictConstant.DICT_CACHE_FLAG_KEY, true);
@@ -70,9 +71,13 @@ public abstract class DictUtils {
 
         var dict = dictRepository.findByCode(dictCode);
         if (ObjectUtils.isNull(dict)) return;
+        if (!dict.getEnable()) return;
         RedisUtils.support().getOps4hash().put(DictConstant.DICT_CACHE_TYPE_KEY, dictCode, dict);
 
-        var dictData = dictDataRepository.findByDictCode(dictCode);
+        var dictData = dictDataRepository.findByDictCode(dictCode)
+                .stream()
+                .filter(DictDataEntity::getEnable)
+                .collect(Collectors.toList());
         if (ObjectUtils.isNull(dictData)) return;
         RedisUtils.support().getOps4hash().put(DictConstant.DICT_CACHE_DATA_KEY, dictCode, dictData);
     }
