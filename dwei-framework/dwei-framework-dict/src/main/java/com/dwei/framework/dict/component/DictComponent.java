@@ -1,7 +1,7 @@
 package com.dwei.framework.dict.component;
 
 import com.dwei.core.guide.component.ComponentService;
-import com.dwei.framework.dict.DictUtils;
+import com.dwei.framework.dict.utils.DictUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +19,7 @@ public class DictComponent implements ComponentService {
 
     @Override
     public void start() {
-        DictUtils.refresh();
+        DictUtils.refresh(false);
     }
 
     @Override

@@ -166,7 +166,7 @@ pagehelper:
 # Sa-Token
 sa-token:
   # 自定义分组属性
-  group: dwei_admin
+  group: ${spring.application.name}
   # http header 中，从 Authorization 中获取 tokenValue
   token-name: auth_token
   # token 过期时间 30 天

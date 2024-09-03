@@ -1,5 +1,5 @@
 spring:
   application:
-    name: dwei-admin
+    name: dwei_admin
   profiles:
     active: common,dev

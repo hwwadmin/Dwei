@@ -24,6 +24,11 @@ public class DictRepositoryImpl extends BaseRepositoryImpl<DictMapper, DictEntit
     }
 
     @Override
+    public DictEntity findByCode(String code) {
+        return lambdaQuery().eq(DictEntity::getCode, code).one();
+    }
+
+    @Override
     public boolean existsByCode(String code) {
         Assert.isStrNotBlank(code);
         return lambdaQuery().eq(DictEntity::getCode, code.trim()).exists();

@@ -31,6 +31,14 @@ public class DictController {
     }
 
     /**
+     * 根据字典类型编码查询字典
+     */
+    @GetMapping("/{code}")
+    public DictResponse code(@PathVariable String code) {
+        return dictService.code(code);
+    }
+
+    /**
      * 新增字典分类
      */
     @PostMapping("/add")

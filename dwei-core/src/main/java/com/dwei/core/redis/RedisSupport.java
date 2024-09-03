@@ -1,6 +1,9 @@
 package com.dwei.core.redis;
 
+import com.dwei.common.constants.AppConstants;
+import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.redis.sorted.*;
+import com.dwei.core.utils.CtxUtils;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Getter;
@@ -10,6 +13,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,6 +50,10 @@ public class RedisSupport {
         this.bloomFilter = new BloomFilterRedisSupport(this.redisTemplate);
     }
 
+    public Set<String> keys(final String pattern) {
+        return redisTemplate.keys(pattern);
+    }
+
     public boolean expire(final String key, final long timeout) {
         return expire(key, timeout, TimeUnit.SECONDS);
     }
@@ -65,9 +73,20 @@ public class RedisSupport {
         return ret == null ? 0 : ret;
     }
 
+    public long deleteKeysByPattern(String pattern) {
+        // 非必要慎用
+        Set<String> keys = keys(pattern);
+        if (ObjectUtils.isNull(keys)) return 0;
+        return del(keys);
+    }
+
     public boolean isExist(final String key) {
         Boolean ret = redisTemplate.hasKey(key);
         return ret != null && ret;
+    }
+
+    public String format(final String key) {
+        return CtxUtils.getProjectName() + AppConstants.MARK_COLON + key;
     }
 
 }

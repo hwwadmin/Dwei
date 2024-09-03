@@ -61,6 +61,12 @@ public class Lists {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toMap(kMapper, vMapper));
     }
 
+    public static <K, T> Map<K, List<T>> toGroup(final List<T> list, final Function<T, K> mapper) {
+        Assert.nonNull(mapper);
+        if (ObjectUtils.isNull(list)) return Maps.of();
+        return list.stream().filter(Objects::nonNull).collect(Collectors.groupingBy(mapper));
+    }
+
     public static <T, V> Set<V> toSet(final List<T> list, final Function<T, V> mapper) {
         Assert.nonNull(mapper);
         if (ObjectUtils.isNull(list)) return new HashSet<>();

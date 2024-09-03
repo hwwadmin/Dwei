@@ -11,6 +11,9 @@ public interface IDictRepository extends IBaseRepository<DictMapper, DictEntity>
 
     List<DictEntity> query(DictQuery query);
 
+    /** 根据字典code查询 */
+    DictEntity findByCode(String code);
+
     /** 字典code是否存在 */
     boolean existsByCode(String code);
 

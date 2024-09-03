@@ -11,4 +11,6 @@ public interface IDictDataRepository extends IBaseRepository<DictDataMapper, Dic
 
     List<DictDataEntity> query(DictDataQuery query);
 
+    List<DictDataEntity> findByDictCode(String dictCode);
+
 }

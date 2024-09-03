@@ -78,4 +78,9 @@ public abstract class Maps {
         return newMap;
     }
 
+    @SuppressWarnings("unchecked, rawtypes")
+    public static Map<Object, Object> pack(Map map) {
+        return map;
+    }
+
 }

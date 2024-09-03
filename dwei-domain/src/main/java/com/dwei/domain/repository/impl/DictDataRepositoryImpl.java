@@ -22,6 +22,13 @@ public class DictDataRepositoryImpl extends BaseRepositoryImpl<DictDataMapper, D
                 .list();
     }
 
+    @Override
+    public List<DictDataEntity> findByDictCode(String dictCode) {
+        return lambdaQuery()
+                .eq(DictDataEntity::getDictCode, dictCode)
+                .list();
+    }
+
 }
 
 

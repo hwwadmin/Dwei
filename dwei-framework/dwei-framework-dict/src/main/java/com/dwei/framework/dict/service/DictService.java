@@ -16,6 +16,7 @@ import com.dwei.framework.dict.domain.request.DictDataAddRequest;
 import com.dwei.framework.dict.domain.request.DictQueryRequest;
 import com.dwei.framework.dict.domain.response.DictDataResponse;
 import com.dwei.framework.dict.domain.response.DictResponse;
+import com.dwei.framework.dict.utils.DictUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,11 @@ public class DictService {
         return PageResponse.of(dicts, t -> convertResponse(t, dictDataGroup));
     }
 
+    public DictResponse code(String code) {
+        var dict = DictUtils.get(code);
+        return convertResponse(dict.getFirst(), Lists.map(dict.getSecond(), this::convertResponse));
+    }
+
     public void addDict(DictAddRequest request) {
         Assert.isFalse(dictRepository.existsByCode(request.getCode()), "重复的字段类型");
 
@@ -78,13 +84,17 @@ public class DictService {
     }
 
     private DictResponse convertResponse(DictEntity dict, Map<String, List<DictDataResponse>> dictDataGroup) {
+        return convertResponse(dict, dictDataGroup.get(dict.getCode()));
+    }
+
+    private DictResponse convertResponse(DictEntity dict, List<DictDataResponse> dictData) {
         return DictResponse.builder()
                 .id(dict.getId())
                 .name(dict.getName())
                 .code(dict.getCode())
                 .remark(dict.getRemark())
                 .enable(dict.getEnable())
-                .dictData(dictDataGroup.get(dict.getCode()))
+                .dictData(dictData)
                 .build();
     }
 
