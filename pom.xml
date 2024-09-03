@@ -9,8 +9,6 @@
         <module>dwei-core</module>
         <module>dwei-framework</module>
         <module>dwei-admin</module>
-        <module>dwei-admin/dwei-admin-start</module>
-        <module>dwei-admin/dwei-admin-user</module>
         <module>dwei-domain</module>
     </modules>
     <packaging>pom</packaging>
@@ -41,15 +39,7 @@
 
         <!-- 插件版本-->
         <plugin.maven-compiler-plugin>3.10.1</plugin.maven-compiler-plugin>
-        <plugin.maven-surefire-plugin>3.0.0-M7</plugin.maven-surefire-plugin>
         <plugin.maven-clean-plugin>3.2.0</plugin.maven-clean-plugin>
-        <plugin.maven-source-plugin>3.2.1</plugin.maven-source-plugin>
-        <plugin.maven-resources-plugin>3.3.0</plugin.maven-resources-plugin>
-        <plugin.maven-jar-plugin>3.2.2</plugin.maven-jar-plugin>
-        <plugin.maven-install-plugin>3.0.1</plugin.maven-install-plugin>
-        <plugin.maven-deploy-plugin>3.0.0</plugin.maven-deploy-plugin>
-        <plugin.versions-maven-plugin>2.7</plugin.versions-maven-plugin>
-        <plugin.jasypt-maven-plugin>3.0.0</plugin.jasypt-maven-plugin>
 
         <!--第三方包引入版本定义-->
         <dubbo.version>3.2.10</dubbo.version>
@@ -264,71 +254,13 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${plugin.maven-surefire-plugin}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>${plugin.maven-clean-plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${plugin.maven-source-plugin}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${plugin.maven-resources-plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${plugin.maven-jar-plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>${plugin.maven-install-plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${plugin.maven-deploy-plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>${plugin.versions-maven-plugin}</version>
-            </plugin>
-            <plugin>
-                <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-maven-plugin</artifactId>
-                <version>${plugin.jasypt-maven-plugin}</version>
             </plugin>
         </plugins>
     </build>
 
     <repositories>
-        <!-- huawei -->
-        <!--        <repository>-->
-        <!--            <id>huaweicloud</id>-->
-        <!--            <name>huaweicloud</name>-->
-        <!--            <layout>default</layout>-->
-        <!--            <url>https://repo.huaweicloud.com/repository/maven/</url>-->
-        <!--        </repository>-->
         <!-- ali -->
         <repository>
             <id>alimaven</id>
