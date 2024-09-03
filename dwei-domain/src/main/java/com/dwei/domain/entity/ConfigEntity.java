@@ -30,6 +30,7 @@ public class ConfigEntity extends BaseEntity implements Serializable {
     /**
      * 参数键
      */
+    @TableField("`key`")
     private String key;
 
     /**
