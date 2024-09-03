@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 管理员用户 Controller
+ * 字典管理 Controller
  *
  * @author hww
  */

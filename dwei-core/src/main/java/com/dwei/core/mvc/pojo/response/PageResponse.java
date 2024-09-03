@@ -1,6 +1,7 @@
 package com.dwei.core.mvc.pojo.response;
 
 import com.dwei.common.utils.Lists;
+import com.dwei.common.utils.ObjectUtils;
 import com.github.pagehelper.PageInfo;
 import lombok.*;
 
@@ -33,10 +34,12 @@ public final class PageResponse<T> {
     }
 
     public static <T, R> PageResponse<R> of(List<T> list, Function<T, R> mapper) {
+        if (ObjectUtils.isNull(list)) return empty();
         return of(list, new PageInfo<>(list).getTotal(), mapper);
     }
 
     public static <T, R> PageResponse<R> of(List<T> list, long total, Function<T, R> mapper) {
+        if (ObjectUtils.isNull(list)) return empty();
         return PageResponse.<R>builder()
                 .total(total)
                 .items(Lists.map(list, mapper))
