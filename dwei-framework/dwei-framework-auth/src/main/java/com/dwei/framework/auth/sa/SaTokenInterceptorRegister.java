@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 public class SaTokenInterceptorRegister implements InterceptorRegister {
 
-    @Value("${dwei.path.ignore}")
+    @Value("${dwei.api.ignore}")
     private List<String> notMatchConfig;
 
     private final SaTokenInterceptor interceptor;

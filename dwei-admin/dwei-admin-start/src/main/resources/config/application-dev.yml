@@ -74,8 +74,12 @@ spring:
 #      topic: test2
 #      bean-name: com.yomi.boot.framework.mq.rocketmq.DefaultRocketMqConsumerCallback
 
+# dwei框架配置
 dwei:
-  path:
+  # 日志处理器
+  logs: defaultLog
+  api:
+    # 忽略权限校验的uri
     ignore: /**/user/login, /**/user/register
   boot:
     logs: crashLog

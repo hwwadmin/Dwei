@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.http.HttpStatus;
@@ -39,13 +40,10 @@ import java.util.stream.Collectors;
  */
 @RestControllerAdvice
 @Slf4j
+@RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
     private final ExceptionHandlerLogManager exceptionHandlerLogManager;
-
-    public GlobalExceptionHandler(ExceptionHandlerLogManager exceptionHandlerLogManager) {
-        this.exceptionHandlerLogManager = exceptionHandlerLogManager;
-    }
 
     private void log(HttpServletRequest request, Exception ex) {
         try {

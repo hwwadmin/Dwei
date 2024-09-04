@@ -10,7 +10,7 @@ import org.springframework.web.util.WebUtils;
  * 简单打印下文件日志
  */
 @Slf4j
-@Component("defaultExceptionHandlerLog")
+@Component("defaultLog")
 public class DefaultExceptionHandlerLog implements ExceptionHandlerLog {
 
     @Override
