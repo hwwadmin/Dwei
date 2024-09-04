@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 public class ConfigRepositoryImpl extends BaseRepositoryImpl<ConfigMapper, ConfigEntity>
         implements IConfigRepository {
 
+    @Override
+    public ConfigEntity findByKey(String key) {
+        return lambdaQuery().eq(ConfigEntity::getKey, key).one();
+    }
+
 }
 
 

@@ -6,4 +6,6 @@ import com.dwei.domain.mapper.ConfigMapper;
 
 public interface IConfigRepository extends IBaseRepository<ConfigMapper, ConfigEntity> {
 
+    ConfigEntity findByKey(String key);
+
 }
