@@ -47,6 +47,7 @@ public abstract class ConfigUtils {
             List<ConfigEntity> configs = repository.list();
 
             RedisUtils.support().deleteKeysByPattern(ConfigConstants.CONFIG_CACHE_All_PATTER);
+            RedisUtils.support().getOps4str().set(ConfigConstants.CONFIG_CACHE_FLAG_KEY, true);
             RedisUtils.support().getOps4hash().putAll(ConfigConstants.CONFIG_CACHE_DATA_KEY, Maps.pack(Lists.toMap(configs, ConfigEntity::getKey)));
 
             return null;

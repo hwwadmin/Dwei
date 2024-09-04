@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 public class ExceptionHandlerLogManager {
 
-    @Value("${dwei.logs:defaultLog}")
+    @Value("${dwei.logs.ex:defaultExLog}")
     private List<String> beanNames;
 
     @Getter

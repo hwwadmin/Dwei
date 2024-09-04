@@ -76,8 +76,10 @@ spring:
 
 # dwei框架配置
 dwei:
-  # 日志处理器
-  logs: defaultLog
+  # 日志配置
+  logs:
+    # 崩溃日志处理器配置
+    ex: defaultExLog
   api:
     # 忽略权限校验的uri
     ignore: /**/user/login, /**/user/register
