@@ -4,6 +4,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import com.dwei.common.utils.JsonUtils;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.lock.DistributedLock;
+import com.dwei.core.utils.CtxUtils;
 import com.dwei.core.utils.ExStackUtils;
 import com.dwei.core.utils.RedisUtils;
 import com.dwei.core.utils.RequestUtils;
@@ -39,6 +40,7 @@ public class CrashLogConsumer {
         var logEntity = new CrashLogEntity();
         logEntity.setUri(request.getRequestURI());
         logEntity.setMethod(request.getMethod());
+        logEntity.setTraceId(CtxUtils.getTraceId(request));
         logEntity.setHeadParam(RequestUtils.getHeadParamStr(request));
         logEntity.setRequestParam(RequestUtils.getRequestParamStr(request));
         logEntity.setBodyParam(RequestUtils.getBodyParam(request));

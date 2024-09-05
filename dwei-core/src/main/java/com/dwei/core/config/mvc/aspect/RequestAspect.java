@@ -1,6 +1,5 @@
 package com.dwei.core.config.mvc.aspect;
 
-import com.dwei.common.utils.IdUtils;
 import com.dwei.core.utils.CtxUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -30,16 +29,12 @@ public class RequestAspect {
     public Object around(ProceedingJoinPoint point) throws Throwable {
 
         // 添加链路id
-        doTraceId();
+        CtxUtils.putTraceId();
 
         // 处理逻辑需要的时候继续添加，或者从这边开个接口出去让外部模块去实现
         // ...
 
         return point.proceed();
-    }
-
-    private void doTraceId() {
-        CtxUtils.putTraceId(IdUtils.nextIdStr());
     }
 
 }
