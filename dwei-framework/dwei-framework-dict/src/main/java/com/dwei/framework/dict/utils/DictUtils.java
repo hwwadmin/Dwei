@@ -49,7 +49,7 @@ public abstract class DictUtils {
         if (!compel && RedisUtils.support().isExist(DictConstant.DICT_CACHE_FLAG_KEY)) return;
 
         DistributedLock distributedLock = SpringContextUtils.getBean(DistributedLock.class);
-        distributedLock.tryLock(DictConstant.LOCK_DICT, 1000, () -> {
+        distributedLock.tryLock(DictConstant.LOCK, 1000, () -> {
             log.info("刷新字典缓存");
             IDictRepository dictRepository = SpringContextUtils.getBean(IDictRepository.class);
             IDictDataRepository dictDataRepository = SpringContextUtils.getBean(IDictDataRepository.class);
@@ -73,7 +73,7 @@ public abstract class DictUtils {
      */
     public synchronized static void refresh(String dictCode) {
         DistributedLock distributedLock = SpringContextUtils.getBean(DistributedLock.class);
-        distributedLock.tryLock(DictConstant.LOCK_DICT, 1000, () -> {
+        distributedLock.tryLock(DictConstant.LOCK, 1000, () -> {
             log.info("刷新指定字典缓存[{}]", dictCode);
             IDictRepository dictRepository = SpringContextUtils.getBean(IDictRepository.class);
             IDictDataRepository dictDataRepository = SpringContextUtils.getBean(IDictDataRepository.class);
