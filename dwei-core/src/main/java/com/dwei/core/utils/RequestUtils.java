@@ -96,6 +96,10 @@ public class RequestUtils {
         return JsonUtils.bean2JsonStr(getHeadParam());
     }
 
+    public static String getHeadParamStr(ContentCachingRequestWrapper request) {
+        return JsonUtils.bean2JsonStr(getHeadParam(request));
+    }
+
     /**
      * 获取http的请求参数
      */
@@ -109,6 +113,10 @@ public class RequestUtils {
 
     public static String getRequestParamStr() {
         return JsonUtils.bean2JsonStr(getRequestParam());
+    }
+
+    public static String getRequestParamStr(ContentCachingRequestWrapper request) {
+        return JsonUtils.bean2JsonStr(getRequestParam(request));
     }
 
     public static String getParameter(String name) {

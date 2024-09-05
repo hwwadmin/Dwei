@@ -15,12 +15,7 @@
         <!-- dwei -->
         <dependency>
             <groupId>com.dwei</groupId>
-            <artifactId>dwei-framework-auth</artifactId>
-            <version>${project.root.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dwei</groupId>
-            <artifactId>dwei-domain</artifactId>
+            <artifactId>dwei-framework-boot</artifactId>
             <version>${project.root.version}</version>
         </dependency>
 

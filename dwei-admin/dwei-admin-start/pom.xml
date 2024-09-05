@@ -18,16 +18,6 @@
             <artifactId>dwei-admin-user</artifactId>
             <version>${project.root.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.dwei</groupId>
-            <artifactId>dwei-framework-dict</artifactId>
-            <version>${project.root.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dwei</groupId>
-            <artifactId>dwei-framework-config</artifactId>
-            <version>${project.root.version}</version>
-        </dependency>
 
     </dependencies>
 

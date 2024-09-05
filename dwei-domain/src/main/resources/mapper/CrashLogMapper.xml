@@ -8,7 +8,6 @@
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="uri" column="uri" jdbcType="VARCHAR"/>
             <result property="method" column="method" jdbcType="VARCHAR"/>
-            <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="headParam" column="head_param" jdbcType="VARCHAR"/>
             <result property="requestParam" column="request_param" jdbcType="VARCHAR"/>
             <result property="bodyParam" column="body_param" jdbcType="VARCHAR"/>
@@ -21,8 +20,9 @@
 
     <sql id="Base_Column_List">
         id,uri,method,
-        user_id,head_param,request_param,
+        head_param,request_param,
         body_param,message,stack_exception,
         create_time,update_time,delete_time
     </sql>
+
 </mapper>

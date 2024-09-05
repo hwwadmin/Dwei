@@ -15,6 +15,7 @@
         <module>dwei-framework-auth</module>
         <module>dwei-framework-config</module>
         <module>dwei-framework-log</module>
+        <module>dwei-framework-boot</module>
     </modules>
 
 </project>

@@ -34,11 +34,6 @@ public class CrashLogEntity extends BaseEntity implements Serializable {
     private String method;
 
     /**
-     * 请求用户id
-     */
-    private Long userId;
-
-    /**
      * head参数
      */
     private String headParam;

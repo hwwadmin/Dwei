@@ -79,10 +79,7 @@ dwei:
   # 日志配置
   logs:
     # 崩溃日志处理器配置
-    ex: defaultExLog
+    ex: defaultExLog, crashLog
   api:
     # 忽略权限校验的uri
     ignore: /**/user/login, /**/user/register
-  boot:
-    logs: crashLog
-    rbac-check-auth: rbacCheckDefault
