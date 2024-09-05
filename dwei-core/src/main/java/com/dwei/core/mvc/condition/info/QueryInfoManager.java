@@ -2,7 +2,9 @@ package com.dwei.core.mvc.condition.info;
 
 import com.dwei.common.utils.*;
 import com.dwei.core.mvc.condition.annotation.QueryCondition;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -15,6 +17,7 @@ import java.util.Objects;
  *
  * @author hww
  */
+@Slf4j
 public class QueryInfoManager {
 
     private static final Map<Class<?>, List<QueryInfo>> cache = Maps.of();
@@ -54,10 +57,10 @@ public class QueryInfoManager {
 
             List<QueryInfo> queryInfos = Lists.of();
             Arrays.stream(fields).forEach(field -> {
-                QueryCondition queryCondition = field.getAnnotation(QueryCondition.class);
-                if (Objects.isNull(queryCondition)) return;
+                QueryCondition conditionAnnotation = AnnotationUtils.getAnnotation(field, QueryCondition.class);
+                if (Objects.isNull(conditionAnnotation)) return;
 
-                var queryInfo = parseCondition(clazz, field, queryCondition);
+                var queryInfo = parseCondition(clazz, field, conditionAnnotation);
                 queryInfos.add(queryInfo);
             });
 
@@ -65,23 +68,23 @@ public class QueryInfoManager {
         }
     }
 
-    private QueryInfo parseCondition(Class<?> clazz, Field field, QueryCondition condition) {
+    private QueryInfo parseCondition(Class<?> clazz, Field field, QueryCondition conditionAnnotation) {
         // 不设置的话默认为当前注解的属性名
-        var name = ObjectUtils.nonNull(condition.name()) ? condition.name():
+        var name = ObjectUtils.nonNull(conditionAnnotation.name()) ? conditionAnnotation.name():
                 field.getName();
 
         var queryInfo = QueryInfo.builder()
                 .clazz(clazz)
                 .field(field)
-                .type(condition.type())
-                .name(name)
+                .type(conditionAnnotation.type())
+                .name(conditionAnnotation.enableConvertName() ? StringUtils.toUnderlineCase(name) : name)
                 .build();
 
         // between操作进行额外解析
-        if (ObjectUtils.equals(condition.type(), QueryType.BETWEEN)) {
-            Assert.isStrNotBlank(condition.betweenName(), "between操作的关联属性未设置");
-            queryInfo.setBetweenName(condition.betweenName());
-            var betweenField = ReflectUtils.getField(clazz, condition.betweenName());
+        if (ObjectUtils.equals(conditionAnnotation.type(), QueryType.BETWEEN)) {
+            Assert.isStrNotBlank(conditionAnnotation.betweenName(), "between操作的关联属性未设置");
+            queryInfo.setBetweenName(conditionAnnotation.betweenName());
+            var betweenField = ReflectUtils.getField(clazz, conditionAnnotation.betweenName());
             Assert.nonNull(betweenField, "between关联属性名无法获取对应字段");
             queryInfo.setBetweenField(betweenField);
         }

@@ -40,7 +40,7 @@ public class DictService {
 
         // dict data
         List<String> dictCodeList = Lists.map(dicts, DictEntity::getCode);
-        List<DictDataEntity> dictDataEntities = dictDataRepository.query(DictDataQuery.builder()
+        List<DictDataEntity> dictDataEntities = dictDataRepository.autoQueue(DictDataQuery.builder()
                 .dictCodeIn(dictCodeList)
                 .build());
         Map<String, List<DictDataResponse>> dictDataGroup = dictDataEntities.stream()

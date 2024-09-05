@@ -8,6 +8,8 @@ import com.dwei.common.utils.ObjectUtils;
 import com.dwei.common.utils.ReflectUtils;
 import com.dwei.core.mvc.condition.info.QueryInfoManager;
 
+import java.util.Collection;
+
 /**
  * 基于mybatisPlus的条件查询自动构造器
  * 这个自动解析只支持简单的构造，复杂的请自行编写
@@ -40,7 +42,10 @@ public abstract class QueryConditionUtils {
                 case EQ -> wrapper.eq(ObjectUtils.nonNull(value), queryInfo.getName(), value);
                 case NEQ -> wrapper.ne(ObjectUtils.nonNull(value), queryInfo.getName(), value);
                 case LIKE -> wrapper.like(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case IN -> wrapper.in(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+                case IN -> {
+                    Assert.isTrue(ReflectUtils.isSubClass(value, Collection.class), "IN条件只允许集合参数");
+                    wrapper.in(ObjectUtils.nonNull(value), queryInfo.getName(), (Collection<?>) value);
+                }
                 case GT -> wrapper.gt(ObjectUtils.nonNull(value), queryInfo.getName(), value);
                 case GTE -> wrapper.ge(ObjectUtils.nonNull(value), queryInfo.getName(), value);
                 case LT -> wrapper.lt(ObjectUtils.nonNull(value), queryInfo.getName(), value);

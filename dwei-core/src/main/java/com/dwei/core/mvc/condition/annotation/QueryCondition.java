@@ -37,4 +37,10 @@ public @interface QueryCondition {
      */
     String betweenName() default "";
 
+    /**
+     * 是否启用自动转换实体字段名，默认启用
+     * 驼峰 -> 下划线
+     */
+    boolean enableConvertName() default true;
+
 }
