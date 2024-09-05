@@ -30,7 +30,7 @@ public @interface QueryCondition {
     String name() default "";
 
     /**
-     * between操作的关联属性
+     * between/not_between 操作的关联属性
      * 操作类型为between的时候必填
      * ps:注解的当前字段是前置参数，该关联为后置参数名称
      * 即 between(name, betweenName)

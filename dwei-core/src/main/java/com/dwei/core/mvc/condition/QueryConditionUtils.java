@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.dwei.common.utils.Assert;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.common.utils.ReflectUtils;
+import com.dwei.core.mvc.condition.info.QueryInfo;
 import com.dwei.core.mvc.condition.info.QueryInfoManager;
 
 import java.util.Collection;
@@ -36,32 +37,50 @@ public abstract class QueryConditionUtils {
         Assert.isNotEmpty(queryInfos, "查无对应查询条件信息");
 
         QueryChainWrapper<T> wrapper = new QueryChainWrapper<>(mapper);
-        queryInfos.forEach(queryInfo -> {
-            Object value = ReflectUtils.getFieldValue(condition, queryInfo.getField());
-            switch (queryInfo.getType()) {
-                case EQ -> wrapper.eq(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case NEQ -> wrapper.ne(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case LIKE -> wrapper.like(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case IN -> {
-                    Assert.isTrue(ReflectUtils.isSubClass(value, Collection.class), "IN条件只允许集合参数");
-                    wrapper.in(ObjectUtils.nonNull(value), queryInfo.getName(), (Collection<?>) value);
-                }
-                case GT -> wrapper.gt(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case GTE -> wrapper.ge(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case LT -> wrapper.lt(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case LTE -> wrapper.le(ObjectUtils.nonNull(value), queryInfo.getName(), value);
-                case BETWEEN -> {
-                    if (ObjectUtils.isNull(value)) return;
-                    Object betweenValue = ReflectUtils.getFieldValue(condition, queryInfo.getBetweenField());
-                    Assert.nonNull(betweenValue, "between的后置参数为空");
-                    wrapper.between(queryInfo.getName(), value, betweenValue);
-                }
-                case IS_NULL -> wrapper.isNull(queryInfo.getName());
-                case IS_NOT_NULL -> wrapper.isNotNull(queryInfo.getName());
-            }
-        });
+        queryInfos.forEach(queryInfo -> addWrapperCondition(condition, wrapper, queryInfo));
 
         return wrapper;
+    }
+
+    /**
+     * 根据查询信息，wrapper自动添加条件
+     */
+    public static <T> void addWrapperCondition(Object condition, QueryChainWrapper<T> wrapper, QueryInfo queryInfo) {
+        Object value = ReflectUtils.getFieldValue(condition, queryInfo.getField());
+        switch (queryInfo.getType()) {
+            case EQ -> wrapper.eq(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case NEQ -> wrapper.ne(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case LIKE -> wrapper.like(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case NOT_LIKE -> wrapper.notLike(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case LIKE_L -> wrapper.likeLeft(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case LIKE_R -> wrapper.likeRight(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case IN -> {
+                Assert.isTrue(ReflectUtils.isSubClass(value, Collection.class), "IN条件只允许集合参数");
+                wrapper.in(ObjectUtils.nonNull(value), queryInfo.getName(), (Collection<?>) value);
+            }
+            case NOT_IN -> {
+                Assert.isTrue(ReflectUtils.isSubClass(value, Collection.class), "NOT_IN条件只允许集合参数");
+                wrapper.notIn(ObjectUtils.nonNull(value), queryInfo.getName(), (Collection<?>) value);
+            }
+            case GT -> wrapper.gt(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case GTE -> wrapper.ge(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case LT -> wrapper.lt(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case LTE -> wrapper.le(ObjectUtils.nonNull(value), queryInfo.getName(), value);
+            case BETWEEN -> {
+                if (ObjectUtils.isNull(value)) return;
+                Object betweenValue = ReflectUtils.getFieldValue(condition, queryInfo.getBetweenField());
+                Assert.nonNull(betweenValue, "between的后置参数为空");
+                wrapper.between(queryInfo.getName(), value, betweenValue);
+            }
+            case NOT_BETWEEN -> {
+                if (ObjectUtils.isNull(value)) return;
+                Object betweenValue = ReflectUtils.getFieldValue(condition, queryInfo.getBetweenField());
+                Assert.nonNull(betweenValue, "between的后置参数为空");
+                wrapper.notBetween(queryInfo.getName(), value, betweenValue);
+            }
+            case IS_NULL -> wrapper.isNull(queryInfo.getName());
+            case IS_NOT_NULL -> wrapper.isNotNull(queryInfo.getName());
+        }
     }
 
 }

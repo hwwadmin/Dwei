@@ -83,7 +83,8 @@ public class QueryInfoManager {
                 .build();
 
         // between操作进行额外解析
-        if (ObjectUtils.equals(conditionAnnotation.type(), QueryType.BETWEEN)) {
+        if (ObjectUtils.equals(conditionAnnotation.type(), QueryType.BETWEEN) ||
+                ObjectUtils.equals(conditionAnnotation.type(), QueryType.NOT_BETWEEN)) {
             Assert.isStrNotBlank(conditionAnnotation.betweenName(), "between操作的关联属性未设置");
             queryInfo.setBetweenName(conditionAnnotation.betweenName());
             var betweenField = ReflectUtils.getField(clazz, conditionAnnotation.betweenName());
