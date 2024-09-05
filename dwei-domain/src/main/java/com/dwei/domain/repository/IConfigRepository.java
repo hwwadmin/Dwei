@@ -6,6 +6,7 @@ import com.dwei.domain.mapper.ConfigMapper;
 
 public interface IConfigRepository extends IBaseRepository<ConfigMapper, ConfigEntity> {
 
+    /** 根据参数键查询参数配置 */
     ConfigEntity findByKey(String key);
 
 }

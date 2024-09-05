@@ -1,10 +1,10 @@
 package com.dwei.framework.config.service;
 
 import com.dwei.common.utils.Assert;
-import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.page.PageUtils;
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.domain.entity.ConfigEntity;
+import com.dwei.domain.query.config.ConfigQuery;
 import com.dwei.domain.repository.IConfigRepository;
 import com.dwei.framework.config.domain.request.ConfigAddRequest;
 import com.dwei.framework.config.domain.request.ConfigQueryRequest;
@@ -22,9 +22,9 @@ public class ConfigService {
 
     public PageResponse<ConfigResponse> list(ConfigQueryRequest request) {
         PageUtils.startPage();
-        var configs = configRepository.lambdaQuery()
-                .eq(ObjectUtils.nonNull(request.getName()), ConfigEntity::getName, request.getName())
-                .list();
+        var configs = configRepository.autoQueue(ConfigQuery.builder()
+                .name(request.getName())
+                .build());
         return PageResponse.of(configs, this::covertResponse);
     }
 
