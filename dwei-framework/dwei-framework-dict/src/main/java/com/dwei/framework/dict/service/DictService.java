@@ -3,7 +3,6 @@ package com.dwei.framework.dict.service;
 import com.dwei.common.utils.Assert;
 import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
-import com.dwei.core.mvc.page.PageUtils;
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.domain.entity.DictDataEntity;
 import com.dwei.domain.entity.DictEntity;
@@ -31,8 +30,7 @@ public class DictService {
     private final IDictDataRepository dictDataRepository;
 
     public PageResponse<DictResponse> list(DictQueryRequest request) {
-        PageUtils.startPage();
-        List<DictEntity> dicts = dictRepository.autoQueue(DictQuery.builder()
+        List<DictEntity> dicts = dictRepository.autoPage(DictQuery.builder()
                 .name(request.getName())
                 .code(request.getCode())
                 .build());

@@ -19,4 +19,10 @@ public interface IBaseRepository<M extends BaseMapper<T>, T extends BaseEntity> 
      */
     List<T> autoQueue(Object condition);
 
+    /**
+     * 自动分页查询
+     * 条件由解析condition后自动构造
+     */
+    List<T> autoPage(Object condition);
+
 }

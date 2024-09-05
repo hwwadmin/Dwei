@@ -1,7 +1,6 @@
 package com.dwei.framework.config.service;
 
 import com.dwei.common.utils.Assert;
-import com.dwei.core.mvc.page.PageUtils;
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.domain.entity.ConfigEntity;
 import com.dwei.domain.query.config.ConfigQuery;
@@ -21,8 +20,7 @@ public class ConfigService {
     private final IConfigRepository configRepository;
 
     public PageResponse<ConfigResponse> list(ConfigQueryRequest request) {
-        PageUtils.startPage();
-        var configs = configRepository.autoQueue(ConfigQuery.builder()
+        var configs = configRepository.autoPage(ConfigQuery.builder()
                 .name(request.getName())
                 .build());
         return PageResponse.of(configs, this::covertResponse);
