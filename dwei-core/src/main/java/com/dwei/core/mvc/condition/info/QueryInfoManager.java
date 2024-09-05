@@ -61,15 +61,20 @@ public class QueryInfoManager {
                 queryInfos.add(queryInfo);
             });
 
+            cache.put(clazz, queryInfos);
         }
     }
 
     private QueryInfo parseCondition(Class<?> clazz, Field field, QueryCondition condition) {
+        // 不设置的话默认为当前注解的属性名
+        var name = ObjectUtils.nonNull(condition.name()) ? condition.name():
+                field.getName();
+
         var queryInfo = QueryInfo.builder()
                 .clazz(clazz)
                 .field(field)
                 .type(condition.type())
-                .name(condition.name())
+                .name(name)
                 .build();
 
         // between操作进行额外解析

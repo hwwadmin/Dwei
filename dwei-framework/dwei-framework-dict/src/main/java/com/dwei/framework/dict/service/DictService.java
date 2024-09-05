@@ -32,7 +32,7 @@ public class DictService {
 
     public PageResponse<DictResponse> list(DictQueryRequest request) {
         PageUtils.startPage();
-        List<DictEntity> dicts = dictRepository.query(DictQuery.builder()
+        List<DictEntity> dicts = dictRepository.autoQueue(DictQuery.builder()
                 .name(request.getName())
                 .code(request.getCode())
                 .build());

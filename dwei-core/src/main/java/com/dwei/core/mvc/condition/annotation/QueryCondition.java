@@ -1,6 +1,7 @@
 package com.dwei.core.mvc.condition.annotation;
 
 import com.dwei.core.mvc.condition.info.QueryType;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
@@ -17,7 +18,10 @@ public @interface QueryCondition {
     /**
      * 操作类型
      */
-    QueryType type();
+    @AliasFor("type")
+    QueryType value() default QueryType.EQ;
+    @AliasFor("value")
+    QueryType type() default QueryType.EQ;
 
     /**
      * 实体字段名
@@ -31,6 +35,6 @@ public @interface QueryCondition {
      * ps:注解的当前字段是前置参数，该关联为后置参数名称
      * 即 between(name, betweenName)
      */
-    String betweenName();
+    String betweenName() default "";
 
 }
