@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
+import com.dwei.core.mvc.condition.QueryConditionUtils;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
 
 import java.io.Serializable;
@@ -21,6 +22,11 @@ public class BaseRepositoryImpl<M extends BaseMapper<T>, T extends BaseEntity> e
     @Override
     public M getMapper() {
         return baseMapper;
+    }
+
+    @Override
+    public List<T> autoQueue(Object condition) {
+        return QueryConditionUtils.chainBuild(getBaseMapper(), condition).list();
     }
 
 }
