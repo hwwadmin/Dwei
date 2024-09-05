@@ -50,12 +50,14 @@ public class QueryInfoManager {
         Class<?> clazz = condition.getClass();
         synchronized (clazz) {
             if (cache.containsKey(clazz)) return;
+            List<QueryInfo> queryInfos = Lists.of();
 
             Field[] fields = FieldUtils.getAllFields(clazz);
-            if (Objects.isNull(fields)) return;
-            if (fields.length == 0) return;
+            if (ObjectUtils.isNull(fields)) {
+                cache.put(clazz, queryInfos);
+                return;
+            }
 
-            List<QueryInfo> queryInfos = Lists.of();
             Arrays.stream(fields).forEach(field -> {
                 QueryCondition conditionAnnotation = AnnotationUtils.getAnnotation(field, QueryCondition.class);
                 if (Objects.isNull(conditionAnnotation)) return;
