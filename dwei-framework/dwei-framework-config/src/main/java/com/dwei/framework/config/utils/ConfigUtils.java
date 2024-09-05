@@ -29,7 +29,7 @@ public abstract class ConfigUtils {
      * 根据参数键获取参数配置
      */
     public static ConfigEntity get(String key) {
-        return (ConfigEntity) RedisUtils.support().getOps4hash().get(ConfigConstants.CONFIG_CACHE_DATA_KEY, key);
+        return (ConfigEntity) RedisUtils.support().getOps4hash().get(ConfigConstants.DATA_KEY, key);
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class ConfigUtils {
      * @param compel 是否强制刷新
      */
     public static synchronized void refresh(boolean compel) {
-        if (!compel && RedisUtils.support().isExist(ConfigConstants.CONFIG_CACHE_FLAG_KEY)) return;
+        if (!compel && RedisUtils.support().isExist(ConfigConstants.FLAG_KEY)) return;
 
         DistributedLock distributedLock = SpringContextUtils.getBean(DistributedLock.class);
         distributedLock.tryLock(ConfigConstants.LOCK, 1000, () -> {
@@ -46,9 +46,9 @@ public abstract class ConfigUtils {
             IConfigRepository repository = SpringContextUtils.getBean(IConfigRepository.class);
             List<ConfigEntity> configs = repository.list();
 
-            RedisUtils.support().deleteKeysByPattern(ConfigConstants.CONFIG_CACHE_All_PATTER);
-            RedisUtils.support().getOps4str().set(ConfigConstants.CONFIG_CACHE_FLAG_KEY, true);
-            RedisUtils.support().getOps4hash().putAll(ConfigConstants.CONFIG_CACHE_DATA_KEY, Maps.pack(Lists.toMap(configs, ConfigEntity::getKey)));
+            RedisUtils.support().deleteKeysByPattern(ConfigConstants.All_PATTER);
+            RedisUtils.support().getOps4str().set(ConfigConstants.FLAG_KEY, true);
+            RedisUtils.support().getOps4hash().putAll(ConfigConstants.DATA_KEY, Maps.pack(Lists.toMap(configs, ConfigEntity::getKey)));
 
             return null;
         });
@@ -63,11 +63,11 @@ public abstract class ConfigUtils {
             log.info("刷新指定参数键缓存[{}]", key);
             IConfigRepository repository = SpringContextUtils.getBean(IConfigRepository.class);
 
-            RedisUtils.support().getOps4hash().del(ConfigConstants.CONFIG_CACHE_DATA_KEY, key);
+            RedisUtils.support().getOps4hash().del(ConfigConstants.DATA_KEY, key);
 
             var config = repository.findByKey(key);
             if (ObjectUtils.isNull(config)) return null;
-            RedisUtils.support().getOps4hash().put(ConfigConstants.CONFIG_CACHE_DATA_KEY, key, config);
+            RedisUtils.support().getOps4hash().put(ConfigConstants.DATA_KEY, key, config);
 
             return null;
         });

@@ -9,11 +9,12 @@ import com.dwei.core.utils.RedisUtils;
  */
 public interface DictConstant {
 
-    String LOCK = RedisUtils.support().format("lock:dict");
-    String DICT_CACHE_KEY = RedisUtils.support().format("dict:");
-    String DICT_CACHE_All_PATTER = DICT_CACHE_KEY + "*";
-    String DICT_CACHE_FLAG_KEY = DICT_CACHE_KEY + "f";
-    String DICT_CACHE_TYPE_KEY = DICT_CACHE_KEY + "t";
-    String DICT_CACHE_DATA_KEY = DICT_CACHE_KEY + "d";
+    String CACHE_PREFIX = RedisUtils.support().format("dict:");
+    String LOCK = CACHE_PREFIX + "lock";
+    String DATA = CACHE_PREFIX + "data:";
+    String All_PATTER = DATA + "*";
+    String FLAG_KEY = DATA + "f";
+    String TYPE_KEY = DATA + "t";
+    String DATA_KEY = DATA + "d";
 
 }
