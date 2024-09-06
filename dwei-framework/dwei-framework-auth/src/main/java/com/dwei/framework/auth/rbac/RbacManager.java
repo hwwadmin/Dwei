@@ -1,6 +1,7 @@
 package com.dwei.framework.auth.rbac;
 
 import com.dwei.core.utils.SpringContextUtils;
+import com.dwei.framework.auth.rbac.check.RbacCheck;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

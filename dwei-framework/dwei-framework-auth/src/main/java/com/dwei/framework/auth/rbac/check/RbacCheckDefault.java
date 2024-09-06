@@ -1,4 +1,4 @@
-package com.dwei.framework.auth.rbac;
+package com.dwei.framework.auth.rbac.check;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

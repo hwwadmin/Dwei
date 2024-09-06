@@ -1,4 +1,4 @@
-package com.dwei.framework.auth.rbac;
+package com.dwei.framework.auth.rbac.check;
 
 import jakarta.servlet.http.HttpServletRequest;
 
