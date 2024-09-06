@@ -5,10 +5,11 @@ import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.stp.StpUtil;
 import com.dwei.common.enums.StatusCodeEnum;
 import com.dwei.common.exception.IllegalValidatedException;
+import com.dwei.framework.auth.rbac.RbacManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -19,13 +20,13 @@ import java.util.Objects;
  * @author hww
  */
 @Component
+@RequiredArgsConstructor
 @Slf4j
 public class SaTokenInterceptor extends SaInterceptor {
 
     private static final String httpType4Operation = "OPTIONS";
 
-//    @Value("${yomi.boot.rbac-check-auth:rbacCheckDefault}")
-//    private String rbacCheckAuthBeanName;
+    private final RbacManager rbacManager;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -55,8 +56,7 @@ public class SaTokenInterceptor extends SaInterceptor {
      */
     private void checkAuth(HttpServletRequest request) {
         try {
-//            var rbacCheck = SpringContextUtils.getBean(rbacCheckAuthBeanName, RbacCheck.class);
-//            rbacCheck.checkAuth(request, StpUtil.getLoginIdAsLong(), StpUtil.getTokenValue());
+            rbacManager.check(request, StpUtil.getLoginIdAsLong(), StpUtil.getTokenValue());
         } catch (Exception e) {
             throw IllegalValidatedException.exception(StatusCodeEnum.unauthorized.getCode(), StatusCodeEnum.unauthorized.getDefaultMessage(), e);
         }
