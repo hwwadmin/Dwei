@@ -8,10 +8,12 @@ import com.dwei.core.mvc.pojo.entity.BaseEntity;
 import com.dwei.core.redis.RedisCacheAside;
 import com.dwei.core.utils.RedisUtils;
 import com.dwei.core.utils.SpringContextUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -20,12 +22,13 @@ import java.util.function.Function;
  *
  * @author hww
  */
-public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
+@Slf4j
+public class CacheRepository<R extends IBaseRepository<M, T>,M extends BaseMapper<T>, T extends BaseEntity> {
 
     private static final String LOCK_KEY_FM = "cr:%s:refresh:lock";
     private static final String EXIST_KEY_FM = "cr:%s:refresh:exist";
 
-    private final IBaseRepository<M, T> repository;
+    private final R repository;
     private final RedisCacheAside<T> cacheAside;
 
     /**
@@ -33,7 +36,7 @@ public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
      */
     private final String serviceName;
 
-    public CacheRepository(IBaseRepository<M, T> repository, String serviceName) {
+    public CacheRepository(R repository, String serviceName) {
         Assert.nonNull(repository);
         Assert.isStrNotBlank(serviceName);
 
@@ -43,12 +46,12 @@ public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
                 .serviceName(serviceName)
                 .type(this.repository.getEntityClass())
                 .codeBuild(t -> String.valueOf(t.getId()))
-                .pullData(code -> repository.getOptById(Long.valueOf(code)))
+                .pullData(code -> this.repository.getOptById(Long.valueOf(code)))
                 .build();
     }
 
-    public CacheRepository(IBaseRepository<M, T> repository, String serviceName,
-                           Function<T, String> codeBuild, Function<String, Optional<T>> pullData) {
+    public CacheRepository(R repository, String serviceName,
+                           Function<T, String> codeBuild, BiFunction<String, R, Optional<T>> pullData) {
         Assert.nonNull(repository);
         Assert.isStrNotBlank(serviceName);
         Assert.nonNull(codeBuild);
@@ -60,7 +63,7 @@ public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
                 .serviceName(serviceName)
                 .type(this.repository.getEntityClass())
                 .codeBuild(codeBuild)
-                .pullData(pullData)
+                .pullData(code -> pullData.apply(code, repository))
                 .build();
     }
 
@@ -78,6 +81,7 @@ public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
         DistributedLock distributedLock = SpringContextUtils.getBean(DistributedLock.class);
         String lockKey = RedisUtils.support().format(String.format(LOCK_KEY_FM, serviceName));
         distributedLock.tryLock(lockKey, 1000, () -> {
+            log.info("[{}]缓存全量刷新", serviceName);
             var data = repository.list();
             cacheAside.clear();
             if (ObjectUtils.nonNull(data)) cacheAside.refresh(data);
@@ -105,6 +109,7 @@ public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
      * 刷新指定缓存
      */
     public void refresh(String code) {
+        log.info("[{}]刷新指定缓存 - code:[{}]", serviceName, code);
         cacheAside.del(code);
         cacheAside.get(code);
     }
