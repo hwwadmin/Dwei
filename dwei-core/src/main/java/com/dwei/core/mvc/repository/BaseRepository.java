@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-public class BaseRepositoryImpl<M extends BaseMapper<T>, T extends BaseEntity> extends ServiceImpl<M, T>
+public class BaseRepository<M extends BaseMapper<T>, T extends BaseEntity> extends ServiceImpl<M, T>
         implements IBaseRepository<M, T> {
 
     public List<T> listByIds(final Collection<? extends Serializable> idList) {
