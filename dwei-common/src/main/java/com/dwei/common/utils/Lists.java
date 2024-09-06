@@ -19,6 +19,11 @@ public class Lists {
         return new ArrayList<>();
     }
 
+    public static <T> List<T> ofIterable(Iterable<T> collection) {
+        Assert.isTrue(collection instanceof Collection);
+        return new ArrayList<>((Collection<T>) collection);
+    }
+
     @SafeVarargs
     public static <T> List<T> of(final T... elements) {
         final List<T> list = newArrayList();

@@ -2,12 +2,12 @@ package com.dwei.core.redis;
 
 import cn.hutool.core.util.RandomUtil;
 import com.dwei.common.utils.Assert;
+import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.common.utils.ReflectUtils;
 import com.dwei.core.lock.DistributedLock;
 import com.dwei.core.utils.RedisUtils;
 import com.dwei.core.utils.SpringContextUtils;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
@@ -49,6 +49,9 @@ public class RedisCacheAside<T> {
         return new Builder<>();
     }
 
+    /**
+     * 旁路缓存构造器
+     */
     public static class Builder<T> {
 
         private final RedisCacheAside<T> redisCacheAside;
@@ -74,13 +77,13 @@ public class RedisCacheAside<T> {
             return this;
         }
 
-        public Builder<T> pullData(Function<String, Optional<T>> pullData) {
-            this.redisCacheAside.pullData = pullData;
+        public Builder<T> codeBuild(Function<T, String> codeBuild) {
+            this.redisCacheAside.codeBuild = codeBuild;
             return this;
         }
 
-        public Builder<T> codeBuild(Function<T, String> codeBuild) {
-            this.redisCacheAside.codeBuild = codeBuild;
+        public Builder<T> pullData(Function<String, Optional<T>> pullData) {
+            this.redisCacheAside.pullData = pullData;
             return this;
         }
 
@@ -91,7 +94,7 @@ public class RedisCacheAside<T> {
             Assert.nonNull(this.redisCacheAside.pullData, "根据缓存标识code拉取对应数据函数为空");
 
             if (Objects.isNull(this.redisCacheAside.timeout))
-                this.redisCacheAside.timeout = RandomUtil.randomLong(1728000000L, 2592000000L);
+                this.redisCacheAside.timeout = RandomUtil.randomLong(1728000000L, 2592000000L); // 20天到30天随机
         }
 
         public RedisCacheAside<T> build() {
@@ -105,10 +108,17 @@ public class RedisCacheAside<T> {
         return redisSupport.format(String.format(cache_template, serviceName, code));
     }
 
+    private String allCacheKey() {
+        return redisSupport.format(String.format(cache_template, serviceName, "*"));
+    }
+
     private String getLockKey(String code) {
         return redisSupport.format(String.format(lock_template, serviceName, code));
     }
 
+    /**
+     * 获取指定缓存
+     */
     public Optional<T> get(String code) {
         if (ObjectUtils.isNull(code)) return Optional.empty();
         var cacheKey = getCacheKey(code);
@@ -142,8 +152,11 @@ public class RedisCacheAside<T> {
         return ObjectUtils.nonNull(codeBuild.apply(e1)) ? Optional.of(e1) : Optional.empty();
     }
 
+    /**
+     * 批量查询指定缓存
+     */
     public List<T> list(Collection<String> codes) {
-        if (ObjectUtils.isNull(codes)) return Lists.newArrayList();
+        if (ObjectUtils.isNull(codes)) return Lists.of();
         var keys = codes.stream().map(this::getCacheKey).toList();
         List<T> data = this.redisSupport.getOps4str().multiGet(keys, clazz).stream().filter(Objects::nonNull).collect(Collectors.toList());
         // 数据长度一样的话说明都从缓存查询到直接返回
@@ -162,12 +175,38 @@ public class RedisCacheAside<T> {
         return data;
     }
 
-    public void del(String code) {
-        del(Lists.newArrayList(code));
+    /**
+     * 刷新
+     */
+    public void refresh(Collection<T> data) {
+        var codes = data.stream().map(code -> codeBuild.apply(code)).toList();
+        del(codes);
+        list(codes);
     }
 
+    /**
+     * 删除指定缓存
+     */
+    public void del(String code) {
+        del(Lists.of(code));
+    }
+
+    /**
+     * 批量删除指定缓存
+     */
     public void del(Iterable<String> codes) {
-        this.redisSupport.del(Lists.newArrayList(codes).stream().map(this::getCacheKey).collect(Collectors.toList()));
+        var keys = Lists.ofIterable(codes)
+                .stream()
+                .map(this::getCacheKey)
+                .collect(Collectors.toList());
+        this.redisSupport.del(keys);
+    }
+
+    /**
+     * 清理全部缓存
+     */
+    public void clear() {
+        RedisUtils.support().deleteKeysByPattern(allCacheKey());
     }
 
 }

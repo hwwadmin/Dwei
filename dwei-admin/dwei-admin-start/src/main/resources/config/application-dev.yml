@@ -9,8 +9,6 @@ spring:
       url: jdbc:mysql://192.168.2.163:13306/dwei?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
       username: root
       password: 123456
-      # db异步初始化
-      asyncInit: true
   data:
     # redis
     redis:

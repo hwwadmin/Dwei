@@ -58,6 +58,8 @@ spring:
       name: masterDs
       driver-class-name: com.mysql.cj.jdbc.Driver
       # 连接池配置
+      # db异步初始化
+      asyncInit: true
       # 连接池初始化连接数
       initialSize: 15
       # 连接池最小连接数
