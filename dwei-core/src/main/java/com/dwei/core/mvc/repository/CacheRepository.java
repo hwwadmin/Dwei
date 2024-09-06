@@ -9,6 +9,8 @@ import com.dwei.core.redis.RedisCacheAside;
 import com.dwei.core.utils.RedisUtils;
 import com.dwei.core.utils.SpringContextUtils;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -90,6 +92,21 @@ public class CacheRepository<M extends BaseMapper<T>, T extends BaseEntity> {
      */
     public T get(String code) {
         return cacheAside.get(code).orElse(null);
+    }
+
+    /**
+     * 批量查询指定缓存
+     */
+    public List<T> list(Collection<String> codes) {
+        return cacheAside.list(codes);
+    }
+
+    /**
+     * 刷新指定缓存
+     */
+    public void refresh(String code) {
+        cacheAside.del(code);
+        cacheAside.get(code);
     }
 
 }
