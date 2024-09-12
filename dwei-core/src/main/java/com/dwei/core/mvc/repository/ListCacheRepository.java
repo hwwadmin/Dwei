@@ -25,10 +25,11 @@ public class ListCacheRepository<
 
     private final Function<T, String> codeBuildFun;
 
-    public ListCacheRepository(R repository, String serviceName, Class<List<T>> clazz,
+    public ListCacheRepository(R repository, String serviceName,
                                Function<T, String> codeBuild,
                                BiFunction<String, R, Optional<List<T>>> pullData) {
-        super(repository, serviceName, clazz,
+        //noinspection unchecked
+        super(repository, serviceName, (Class<List<T>>) (Class<?>) List.class,
                 list -> {
                     Assert.isNotEmpty(list);
                     return codeBuild.apply(list.get(0));
