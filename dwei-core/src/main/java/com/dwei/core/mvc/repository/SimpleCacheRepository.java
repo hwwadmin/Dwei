@@ -20,6 +20,12 @@ public class SimpleCacheRepository<
         T extends BaseEntity>
         extends CacheRepository<R, M, T, T> {
 
+    public SimpleCacheRepository(R repository, String serviceName) {
+        // 默认使用id做code的情况
+        super(repository, serviceName, repository.getEntityClass(),
+                t -> String.valueOf(t.getId()), (code, r) -> r.getOptById(Integer.valueOf(code)));
+    }
+
     public SimpleCacheRepository(R repository, String serviceName,
                                  Function<T, String> codeBuild, BiFunction<String, R, Optional<T>> pullData) {
         super(repository, serviceName, repository.getEntityClass(), codeBuild, pullData);
