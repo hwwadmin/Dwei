@@ -29,8 +29,10 @@ public class ConfigUtils {
     }
 
     private ConfigUtils() {
-        cacheRepository = new SimpleCacheRepository<>(SpringContextUtils.getBean(IConfigRepository.class),
-                serviceName, ConfigEntity::getKey,
+        cacheRepository = new SimpleCacheRepository<>(
+                SpringContextUtils.getBean(IConfigRepository.class),
+                serviceName,
+                ConfigEntity::getKey,
                 (code, repository) -> Optional.ofNullable(repository.findByKey(code)));
     }
 
