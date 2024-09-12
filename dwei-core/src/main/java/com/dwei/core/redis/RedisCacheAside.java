@@ -178,8 +178,8 @@ public class RedisCacheAside<T> {
     /**
      * 刷新
      */
-    public void refresh(Collection<T> data) {
-        var codes = data.stream().map(code -> codeBuild.apply(code)).toList();
+    public void refresh(Collection<T> dataList) {
+        var codes = dataList.stream().map(data -> codeBuild.apply(data)).toList();
         del(codes);
         list(codes);
     }

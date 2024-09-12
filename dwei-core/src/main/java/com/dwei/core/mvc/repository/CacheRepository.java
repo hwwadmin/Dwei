@@ -17,41 +17,29 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * 缓存资源仓库 Repository
+ * 抽象的缓存资源仓库 Repository
  * 基于{@link RedisCacheAside}旁路缓存策略自动构造缓存资源仓库，简化使用
  *
  * @author hww
  */
 @Slf4j
-public class CacheRepository<R extends IBaseRepository<M, T>,M extends BaseMapper<T>, T extends BaseEntity> {
+public abstract class CacheRepository<
+        R extends IBaseRepository<M, T>,
+        M extends BaseMapper<T>,
+        T extends BaseEntity,
+        C> {
 
-    private static final String LOCK_KEY_FM = "cr:%s:refresh:lock";
-    private static final String EXIST_KEY_FM = "cr:%s:refresh:exist";
+    protected static final String LOCK_KEY_FM = "cr:%s:refresh:lock";
+    protected static final String EXIST_KEY_FM = "cr:%s:refresh:exist";
 
-    private final R repository;
-    private final RedisCacheAside<T> cacheAside;
+    protected final R repository;
+    protected final RedisCacheAside<C> cacheAside;
 
-    /**
-     * 服务名称
-     */
-    private final String serviceName;
+    /** 服务名称 */
+    protected final String serviceName;
 
-    public CacheRepository(R repository, String serviceName) {
-        Assert.nonNull(repository);
-        Assert.isStrNotBlank(serviceName);
-
-        this.serviceName = serviceName;
-        this.repository = repository;
-        this.cacheAside = RedisCacheAside.<T>builder()
-                .serviceName(serviceName)
-                .type(this.repository.getEntityClass())
-                .codeBuild(t -> String.valueOf(t.getId()))
-                .pullData(code -> this.repository.getOptById(Long.valueOf(code)))
-                .build();
-    }
-
-    public CacheRepository(R repository, String serviceName,
-                           Function<T, String> codeBuild, BiFunction<String, R, Optional<T>> pullData) {
+    public CacheRepository(R repository, String serviceName, Class<C> clazz,
+                           Function<C, String> codeBuild, BiFunction<String, R, Optional<C>> pullData) {
         Assert.nonNull(repository);
         Assert.isStrNotBlank(serviceName);
         Assert.nonNull(codeBuild);
@@ -59,9 +47,9 @@ public class CacheRepository<R extends IBaseRepository<M, T>,M extends BaseMappe
 
         this.serviceName = serviceName;
         this.repository = repository;
-        this.cacheAside = RedisCacheAside.<T>builder()
+        this.cacheAside = RedisCacheAside.<C>builder()
                 .serviceName(serviceName)
-                .type(this.repository.getEntityClass())
+                .type(clazz)
                 .codeBuild(codeBuild)
                 .pullData(code -> pullData.apply(code, repository))
                 .build();
@@ -84,7 +72,7 @@ public class CacheRepository<R extends IBaseRepository<M, T>,M extends BaseMappe
             log.info("[{}]缓存全量刷新", serviceName);
             var data = repository.list();
             cacheAside.clear();
-            if (ObjectUtils.nonNull(data)) cacheAside.refresh(data);
+            if (ObjectUtils.nonNull(data)) cacheAside.refresh(getAllDate());
             RedisUtils.support().getOps4str().set(existKey, true);
 
             return null;
@@ -92,16 +80,21 @@ public class CacheRepository<R extends IBaseRepository<M, T>,M extends BaseMappe
     }
 
     /**
+     * 获取全部数据
+     */
+    protected abstract List<C> getAllDate();
+
+    /**
      * 获取缓存
      */
-    public T get(String code) {
+    public C get(String code) {
         return cacheAside.get(code).orElse(null);
     }
 
     /**
      * 批量查询指定缓存
      */
-    public List<T> list(Collection<String> codes) {
+    public List<C> list(Collection<String> codes) {
         return cacheAside.list(codes);
     }
 

@@ -1,6 +1,6 @@
 package com.dwei.framework.config.utils;
 
-import com.dwei.core.mvc.repository.CacheRepository;
+import com.dwei.core.mvc.repository.SimpleCacheRepository;
 import com.dwei.core.utils.SpringContextUtils;
 import com.dwei.domain.entity.ConfigEntity;
 import com.dwei.domain.mapper.ConfigMapper;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ConfigUtils {
 
     private static final String serviceName = "config";
-    private final CacheRepository<IConfigRepository, ConfigMapper, ConfigEntity> cacheRepository;
+    private final SimpleCacheRepository<IConfigRepository, ConfigMapper, ConfigEntity> cacheRepository;
 
     private static class ConfigUtilsHolder {
         private static final ConfigUtils instance = new ConfigUtils();
@@ -29,7 +29,7 @@ public class ConfigUtils {
     }
 
     private ConfigUtils() {
-        cacheRepository = new CacheRepository<>(SpringContextUtils.getBean(IConfigRepository.class),
+        cacheRepository = new SimpleCacheRepository<>(SpringContextUtils.getBean(IConfigRepository.class),
                 serviceName, ConfigEntity::getKey,
                 (code, repository) -> Optional.ofNullable(repository.findByKey(code)));
     }
