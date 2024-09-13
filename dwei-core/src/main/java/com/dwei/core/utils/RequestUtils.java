@@ -148,4 +148,8 @@ public class RequestUtils {
         return getBodyParam(getRequestWrapper());
     }
 
+    public static String getUri(HttpServletRequest request) {
+        return request.getRequestURI();
+    }
+
 }

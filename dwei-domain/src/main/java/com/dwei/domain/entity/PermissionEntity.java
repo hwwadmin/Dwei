@@ -47,7 +47,7 @@ public class PermissionEntity extends BaseEntity implements Serializable {
     /**
      * 是否启用
      */
-    private Integer enable;
+    private Boolean enable;
 
     @Serial
     @TableField(exist = false)

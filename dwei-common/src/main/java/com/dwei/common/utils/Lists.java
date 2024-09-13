@@ -78,4 +78,9 @@ public class Lists {
         return list.stream().filter(Objects::nonNull).map(mapper).collect(Collectors.toSet());
     }
 
+    public static <T> List<T> filterNull(final List<T> list) {
+        if (ObjectUtils.isNull(list)) return Lists.of();
+        return list.stream().filter(ObjectUtils::nonNull).collect(Collectors.toList());
+    }
+
 }

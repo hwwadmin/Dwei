@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 
+import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,10 +38,17 @@ public class RoleEntity extends BaseEntity implements Serializable {
     /**
      * 是否启用
      */
-    private Integer enable;
+    private Boolean enable;
 
     @Serial
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 是否管理员
+     */
+    public boolean isAdmin() {
+        return ObjectUtils.equals(tag, "admin");
+    }
 
 }

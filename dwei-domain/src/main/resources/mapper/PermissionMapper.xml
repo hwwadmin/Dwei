@@ -10,7 +10,7 @@
             <result property="tag" column="tag" jdbcType="VARCHAR"/>
             <result property="path" column="path" jdbcType="VARCHAR"/>
             <result property="method" column="method" jdbcType="VARCHAR"/>
-            <result property="enable" column="enable" jdbcType="TINYINT"/>
+            <result property="enable" column="enable"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="deleteTime" column="delete_time" jdbcType="TIMESTAMP"/>

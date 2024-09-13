@@ -32,8 +32,8 @@ public class PermissionUtils {
                 serviceName);
     }
 
-    public static PermissionEntity get(String key) {
-        return getInstance().cacheRepository.get(key);
+    public static PermissionEntity get(Long permissionId) {
+        return getInstance().cacheRepository.get(String.valueOf(permissionId));
     }
 
     /**
@@ -48,8 +48,8 @@ public class PermissionUtils {
     /**
      * 指定刷新
      */
-    public synchronized static void refresh(String key) {
-        getInstance().cacheRepository.refresh(key);
+    public synchronized static void refresh(Long permissionId) {
+        getInstance().cacheRepository.refresh(String.valueOf(permissionId));
     }
 
 }

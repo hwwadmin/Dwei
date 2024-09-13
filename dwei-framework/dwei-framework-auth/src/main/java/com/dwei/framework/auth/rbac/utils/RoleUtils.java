@@ -32,8 +32,8 @@ public class RoleUtils {
                 serviceName);
     }
 
-    public static RoleEntity get(String key) {
-        return getInstance().cacheRepository.get(key);
+    public static RoleEntity get(Long roleId) {
+        return getInstance().cacheRepository.get(String.valueOf(roleId));
     }
 
     /**
@@ -48,8 +48,8 @@ public class RoleUtils {
     /**
      * 指定刷新
      */
-    public synchronized static void refresh(String key) {
-        getInstance().cacheRepository.refresh(key);
+    public synchronized static void refresh(Long roleId) {
+        getInstance().cacheRepository.refresh(String.valueOf(roleId));
     }
 
 }

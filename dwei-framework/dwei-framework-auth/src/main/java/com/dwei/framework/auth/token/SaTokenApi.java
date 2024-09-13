@@ -25,8 +25,12 @@ public class SaTokenApi implements TokenApi {
 
     @Override
     public Token getToken() {
+        var idKey = StpUtil.getLoginId();
+        Assert.nonNull(idKey, "用户未登录");
         return new Token()
-                .setUserId(getUserId())
+                .setIdKey(String.valueOf(idKey))
+                .setUserType(((String) idKey).split(AppConstants.UNDER_LINE)[0])
+                .setUserId(Long.valueOf(((String) idKey).split(AppConstants.UNDER_LINE)[1]))
                 .setToken(StpUtil.getTokenValue());
     }
 
