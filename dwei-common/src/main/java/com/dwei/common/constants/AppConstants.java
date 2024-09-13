@@ -30,6 +30,11 @@ public interface AppConstants {
     String FILL_STRING = "-";
 
     /**
+     * 下划线
+     */
+    String UNDER_LINE = "_";
+
+    /**
      * 加号
      */
     String MARK_ADD = "+";

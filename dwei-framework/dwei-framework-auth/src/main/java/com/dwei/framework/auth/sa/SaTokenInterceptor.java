@@ -2,10 +2,10 @@ package com.dwei.framework.auth.sa;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.interceptor.SaInterceptor;
-import cn.dev33.satoken.stp.StpUtil;
 import com.dwei.common.enums.StatusCodeEnum;
 import com.dwei.common.exception.IllegalValidatedException;
 import com.dwei.framework.auth.rbac.RbacManager;
+import com.dwei.framework.auth.token.TokenApi;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +27,7 @@ public class SaTokenInterceptor extends SaInterceptor {
     private static final String httpType4Operation = "OPTIONS";
 
     private final RbacManager rbacManager;
+    private final TokenApi tokenApi;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -45,7 +46,7 @@ public class SaTokenInterceptor extends SaInterceptor {
     private void checkUser(HttpServletRequest request) {
         try {
             // 用户认证使用sa的封装即可
-            StpUtil.checkLogin();
+            tokenApi.checkLogin();
         } catch (NotLoginException e) {
             throw IllegalValidatedException.exception(StatusCodeEnum.invalidToken.getCode(), StatusCodeEnum.invalidToken.getDefaultMessage(), e);
         }
@@ -56,7 +57,7 @@ public class SaTokenInterceptor extends SaInterceptor {
      */
     private void checkAuth(HttpServletRequest request) {
         try {
-            rbacManager.check(request, StpUtil.getLoginIdAsLong(), StpUtil.getTokenValue());
+            rbacManager.check(request, tokenApi.getToken());
         } catch (Exception e) {
             throw IllegalValidatedException.exception(StatusCodeEnum.unauthorized.getCode(), StatusCodeEnum.unauthorized.getDefaultMessage(), e);
         }

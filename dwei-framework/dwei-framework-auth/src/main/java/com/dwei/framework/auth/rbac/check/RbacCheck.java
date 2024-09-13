@@ -1,5 +1,6 @@
 package com.dwei.framework.auth.rbac.check;
 
+import com.dwei.framework.auth.token.Token;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -9,6 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public interface RbacCheck {
 
-    void checkAuth(HttpServletRequest request, Long userId, String token);
+    void checkAuth(HttpServletRequest request, Token token);
 
 }

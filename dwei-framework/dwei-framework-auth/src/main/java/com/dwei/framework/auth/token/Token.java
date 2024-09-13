@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 public class Token {
 
     private Long userId;
+    private String userType;
     private String token;
     private String refreshToken;
 

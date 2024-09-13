@@ -1,5 +1,6 @@
 package com.dwei.admin.user.service;
 
+import com.dwei.admin.user.AdminUserConstants;
 import com.dwei.admin.user.domain.request.UserRegisterRequest;
 import com.dwei.admin.user.domain.response.TokenResponse;
 import com.dwei.admin.user.domain.response.UserInfoResponse;
@@ -27,7 +28,7 @@ public class AdminUserService {
         Assert.nonNull(user);
         Assert.isTrue(passwordEncoder.checkPw(request.getPassword(), user.getPassword()));
 
-        var token = AuthUtils.getTokenApi().createToken(user.getId());
+        var token = AuthUtils.getTokenApi().createToken(AdminUserConstants.USER_TYPE, user.getId());
 
         return TokenResponse.builder()
                 .userId(token.getUserId())
