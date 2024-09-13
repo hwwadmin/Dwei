@@ -3,6 +3,7 @@ package com.dwei.framework.auth.rbac.component;
 import com.dwei.core.guide.component.ComponentService;
 import com.dwei.framework.auth.rbac.utils.PermissionUtils;
 import com.dwei.framework.auth.rbac.utils.RoleUtils;
+import com.dwei.framework.auth.rbac.utils.UserRoleUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,6 +23,7 @@ public class RbacComponent implements ComponentService {
     public void start() {
         RoleUtils.refresh(false);
         PermissionUtils.refresh(false);
+        UserRoleUtils.refresh(false);
     }
 
     @Override
