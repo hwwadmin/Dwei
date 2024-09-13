@@ -23,6 +23,8 @@ public class RbacController {
 
     /**
      * 用户绑定角色
+     * 通用接口，使用该接口的话，需要前端明确了解用户类型
+     * 建议通过对应类型用户模块提供的接口来给对应类型用户绑定角色
      */
     @PostMapping("/bind-role")
     public void userBindRole(@Valid @RequestBody RbacUserBindRoleRequest request) {

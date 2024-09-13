@@ -1,6 +1,7 @@
 package com.dwei.admin.user.service;
 
 import com.dwei.admin.user.AdminUserConstants;
+import com.dwei.admin.user.domain.request.UserBindRoleRequest;
 import com.dwei.admin.user.domain.request.UserLoginRequest;
 import com.dwei.admin.user.domain.request.UserRegisterRequest;
 import com.dwei.admin.user.domain.response.TokenResponse;
@@ -11,6 +12,7 @@ import com.dwei.core.mvc.password.PasswordEncoder;
 import com.dwei.domain.entity.UserEntity;
 import com.dwei.domain.repository.IUserRepository;
 import com.dwei.framework.auth.AuthUtils;
+import com.dwei.framework.auth.web.service.RbacService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class AdminUserService {
 
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RbacService rbacService;
 
     public TokenResponse login(UserLoginRequest request) {
         var user = userRepository.lambdaQuery()
@@ -60,6 +63,10 @@ public class AdminUserService {
         var user = userRepository.getById(AuthUtils.getUserId());
         Assert.nonNull(user);
         return toResponse(user);
+    }
+
+    public void bindRole(UserBindRoleRequest request) {
+        rbacService.userBindRole(AdminUserConstants.USER_TYPE, request.getUserId(), request.getRoleId());
     }
 
     private UserInfoResponse toResponse(UserEntity user) {

@@ -1,5 +1,6 @@
 package com.dwei.admin.user;
 
+import com.dwei.admin.user.domain.request.UserBindRoleRequest;
 import com.dwei.admin.user.domain.request.UserLoginRequest;
 import com.dwei.admin.user.domain.request.UserRegisterRequest;
 import com.dwei.admin.user.domain.response.TokenResponse;
@@ -51,6 +52,14 @@ public class AdminUserController {
     @GetMapping("/userInfo")
     public UserInfoResponse userInfo() {
         return adminUserService.userInfo();
+    }
+
+    /**
+     * 用户绑定角色
+     */
+    @PostMapping("/bind-role")
+    public void bindRole(@Valid @RequestBody UserBindRoleRequest request) {
+        adminUserService.bindRole(request);
     }
 
 }
