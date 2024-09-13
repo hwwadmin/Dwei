@@ -1,7 +1,5 @@
-package com.dwei.framework.auth.sa;
+package com.dwei.framework.auth.rbac.interceptor;
 
-import cn.dev33.satoken.exception.NotLoginException;
-import cn.dev33.satoken.interceptor.SaInterceptor;
 import com.dwei.common.enums.StatusCodeEnum;
 import com.dwei.common.exception.IllegalValidatedException;
 import com.dwei.framework.auth.rbac.RbacManager;
@@ -11,18 +9,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Objects;
 
 /**
- * SA令牌拦截器
+ * RBAC拦截器
  *
  * @author hww
  */
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class SaTokenInterceptor extends SaInterceptor {
+public class RbacInterceptor implements HandlerInterceptor {
 
     private static final String httpType4Operation = "OPTIONS";
 
@@ -46,7 +45,7 @@ public class SaTokenInterceptor extends SaInterceptor {
     private void checkUser(HttpServletRequest request) {
         try {
             tokenApi.checkLogin();
-        } catch (NotLoginException e) {
+        } catch (Exception e) {
             throw IllegalValidatedException.exception(StatusCodeEnum.invalidToken.getCode(), StatusCodeEnum.invalidToken.getDefaultMessage(), e);
         }
     }
