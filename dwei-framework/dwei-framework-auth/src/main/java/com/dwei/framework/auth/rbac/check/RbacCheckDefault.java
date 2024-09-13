@@ -8,6 +8,7 @@ import com.dwei.framework.auth.rbac.utils.UserRoleUtils;
 import com.dwei.framework.auth.token.Token;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Component("defaultRbacCheck")
 @RequiredArgsConstructor
+@Slf4j
 public class RbacCheckDefault implements RbacCheck {
 
     @Override
@@ -39,8 +41,20 @@ public class RbacCheckDefault implements RbacCheck {
 
         // check
         var path = RequestUtils.getUri(request);
-        for (var permission : permissionList) if (ObjectUtils.equals(path, permission.getPath())) return;
-        Assert.ex(); // 没有匹配到路径抛出异常
+        var method = RequestUtils.getMethod(request);
+        for (var permission : permissionList) {
+            if (ObjectUtils.equals(path, permission.getPath())) {
+                // 成功匹配到满足的路径
+                if (ObjectUtils.isNull(permission.getMethod())) return; // 没有设置方法的话直接通过
+
+                // 校验方法类型
+                if (RequestUtils.isSameMethod(method, permission.getMethod())) return;
+            }
+        }
+
+        // 没有匹配到路径抛出异常
+        log.warn("请求方法无权限! method:[{}], path:[{}]", method, path);
+        Assert.ex();
     }
 
 }

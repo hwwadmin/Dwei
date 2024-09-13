@@ -1,5 +1,6 @@
 package com.dwei.core.utils;
 
+import com.dwei.common.utils.Assert;
 import com.dwei.common.utils.JsonUtils;
 import com.dwei.common.utils.ObjectUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -150,6 +151,16 @@ public class RequestUtils {
 
     public static String getUri(HttpServletRequest request) {
         return request.getRequestURI();
+    }
+
+    public static String getMethod(HttpServletRequest request) {
+        return request.getMethod();
+    }
+
+    public static boolean isSameMethod(String method1, String method2) {
+        Assert.nonNull(method1);
+        Assert.nonNull(method2);
+        return method1.equalsIgnoreCase(method2);
     }
 
 }
