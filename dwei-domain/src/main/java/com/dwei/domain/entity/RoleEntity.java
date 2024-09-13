@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -47,6 +48,7 @@ public class RoleEntity extends BaseEntity implements Serializable {
     /**
      * 是否管理员
      */
+    @JsonIgnore
     public boolean isAdmin() {
         return ObjectUtils.equals(tag, "admin");
     }
