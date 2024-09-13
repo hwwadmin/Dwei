@@ -1,8 +1,10 @@
-package com.dwei.framework.auth.token;
+package com.dwei.framework.auth.sa;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.dwei.common.utils.Assert;
 import com.dwei.framework.auth.rbac.utils.UserRoleUtils;
+import com.dwei.framework.auth.token.Token;
+import com.dwei.framework.auth.token.TokenApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -45,7 +45,6 @@ public class SaTokenInterceptor extends SaInterceptor {
      */
     private void checkUser(HttpServletRequest request) {
         try {
-            // 用户认证使用sa的封装即可
             tokenApi.checkLogin();
         } catch (NotLoginException e) {
             throw IllegalValidatedException.exception(StatusCodeEnum.invalidToken.getCode(), StatusCodeEnum.invalidToken.getDefaultMessage(), e);
