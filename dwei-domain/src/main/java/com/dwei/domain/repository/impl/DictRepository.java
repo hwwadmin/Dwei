@@ -3,8 +3,8 @@ package com.dwei.domain.repository.impl;
 import com.dwei.common.utils.Assert;
 import com.dwei.core.mvc.repository.BaseRepository;
 import com.dwei.domain.entity.DictEntity;
-import com.dwei.domain.repository.IDictRepository;
 import com.dwei.domain.mapper.DictMapper;
+import com.dwei.domain.repository.IDictRepository;
 import org.springframework.stereotype.Service;
 
 @Service

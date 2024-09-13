@@ -2,8 +2,8 @@ package com.dwei.domain.repository.impl;
 
 import com.dwei.core.mvc.repository.BaseRepository;
 import com.dwei.domain.entity.ConfigEntity;
-import com.dwei.domain.repository.IConfigRepository;
 import com.dwei.domain.mapper.ConfigMapper;
+import com.dwei.domain.repository.IConfigRepository;
 import org.springframework.stereotype.Service;
 
 @Service

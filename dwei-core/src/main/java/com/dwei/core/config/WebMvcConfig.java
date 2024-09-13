@@ -1,5 +1,11 @@
 package com.dwei.core.config;
 
+import com.dwei.common.jackson.deserializer.Boolean2IntDeserializer;
+import com.dwei.common.jackson.deserializer.Int2BooleanDeserializer;
+import com.dwei.common.jackson.deserializer.String2InstantDeserializer;
+import com.dwei.common.jackson.deserializer.String2TimeDeserializer;
+import com.dwei.common.jackson.serializer.Instant2LongSerializer;
+import com.dwei.common.jackson.serializer.Long2StringSerializer;
 import com.dwei.common.utils.JsonUtils;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.config.interceptor.InterceptorInfo;
@@ -9,8 +15,6 @@ import com.dwei.core.utils.SpringContextUtils;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.dwei.common.jackson.serializer.*;
-import com.dwei.common.jackson.deserializer.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

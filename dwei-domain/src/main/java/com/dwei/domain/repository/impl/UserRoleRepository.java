@@ -5,8 +5,8 @@ import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.repository.BaseRepository;
 import com.dwei.domain.entity.UserRoleEntity;
-import com.dwei.domain.repository.IUserRoleRepository;
 import com.dwei.domain.mapper.UserRoleMapper;
+import com.dwei.domain.repository.IUserRoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

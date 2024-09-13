@@ -5,8 +5,8 @@ import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.repository.BaseRepository;
 import com.dwei.domain.entity.RolePermissionEntity;
-import com.dwei.domain.repository.IRolePermissionRepository;
 import com.dwei.domain.mapper.RolePermissionMapper;
+import com.dwei.domain.repository.IRolePermissionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

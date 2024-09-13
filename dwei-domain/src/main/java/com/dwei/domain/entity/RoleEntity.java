@@ -2,10 +2,6 @@ package com.dwei.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serial;
-import java.io.Serializable;
-
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.pojo.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +10,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * RBAC#角色表

@@ -2,8 +2,8 @@ package com.dwei.domain.repository.impl;
 
 import com.dwei.core.mvc.repository.BaseRepository;
 import com.dwei.domain.entity.DictDataEntity;
-import com.dwei.domain.repository.IDictDataRepository;
 import com.dwei.domain.mapper.DictDataMapper;
+import com.dwei.domain.repository.IDictDataRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
