@@ -11,11 +11,11 @@ import com.dwei.admin.user.domain.request.UserLoginRequest;
 import com.dwei.common.utils.Assert;
 import com.dwei.core.mvc.password.PasswordEncoder;
 import com.dwei.framework.auth.AuthUtils;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminUserService {
 
     private final IUserRepository userRepository;

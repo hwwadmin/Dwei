@@ -5,7 +5,7 @@ import com.dwei.framework.dict.domain.request.*;
 import com.dwei.framework.dict.domain.response.DictResponse;
 import com.dwei.framework.dict.service.DictService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @author hww
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/system/dict")
 public class DictController {
 

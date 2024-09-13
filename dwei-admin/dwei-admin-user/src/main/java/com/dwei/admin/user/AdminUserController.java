@@ -6,7 +6,7 @@ import com.dwei.admin.user.domain.response.TokenResponse;
 import com.dwei.admin.user.domain.response.UserInfoResponse;
 import com.dwei.admin.user.service.AdminUserService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @author hww
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/admin/user")
 public class AdminUserController {
 

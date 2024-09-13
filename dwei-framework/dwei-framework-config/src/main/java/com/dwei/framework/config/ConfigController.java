@@ -6,7 +6,7 @@ import com.dwei.framework.config.domain.request.ConfigQueryRequest;
 import com.dwei.framework.config.domain.response.ConfigResponse;
 import com.dwei.framework.config.service.ConfigService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @author hww
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/system/config")
 public class ConfigController {
 

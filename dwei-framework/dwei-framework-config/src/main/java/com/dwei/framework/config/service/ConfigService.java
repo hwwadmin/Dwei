@@ -9,12 +9,12 @@ import com.dwei.framework.config.domain.request.ConfigAddRequest;
 import com.dwei.framework.config.domain.request.ConfigQueryRequest;
 import com.dwei.framework.config.domain.response.ConfigResponse;
 import com.dwei.framework.config.utils.ConfigUtils;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ConfigService {
 
     private final IConfigRepository configRepository;
