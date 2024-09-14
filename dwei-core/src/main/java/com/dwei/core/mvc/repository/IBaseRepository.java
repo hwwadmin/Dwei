@@ -57,7 +57,7 @@ public interface IBaseRepository<M extends BaseMapper<T>, T extends BaseEntity> 
     /**
      * 获取全部数据
      */
-    List<T> list();
+    List<T> findAll();
 
     /**
      * 自动条件查询

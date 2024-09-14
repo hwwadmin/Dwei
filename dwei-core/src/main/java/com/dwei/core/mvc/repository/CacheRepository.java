@@ -70,7 +70,7 @@ public abstract class CacheRepository<
         String lockKey = RedisUtils.support().format(String.format(LOCK_KEY_FM, serviceName));
         distributedLock.tryLock(lockKey, 1000, () -> {
             log.info("[{}]缓存全量刷新", serviceName);
-            var data = repository.list();
+            var data = repository.findAll();
             cacheAside.clear();
             if (ObjectUtils.nonNull(data)) cacheAside.refresh(getAllDate());
             RedisUtils.support().getOps4str().set(existKey, true);

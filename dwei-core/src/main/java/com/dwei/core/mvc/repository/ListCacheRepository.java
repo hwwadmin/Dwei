@@ -45,7 +45,7 @@ public class ListCacheRepository<
 
     @Override
     protected List<List<T>> getAllDate() {
-        List<T> all = this.repository.list();
+        List<T> all = this.repository.findAll();
         Map<String, List<T>> group = all.stream().collect(Collectors.groupingBy(codeBuildFun));
         return group.keySet()
                 .stream()

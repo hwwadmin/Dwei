@@ -33,7 +33,7 @@ public class SimpleCacheRepository<
 
     @Override
     protected List<T> getAllDate() {
-        return repository.list();
+        return repository.findAll();
     }
 
 }

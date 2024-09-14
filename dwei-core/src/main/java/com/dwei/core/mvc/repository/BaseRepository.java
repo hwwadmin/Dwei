@@ -136,7 +136,7 @@ public abstract class BaseRepository<M extends BaseMapper<T>, T extends BaseEnti
     }
 
     @Override
-    public List<T> list() {
+    public List<T> findAll() {
         return getMapper().selectList(Wrappers.emptyWrapper());
     }
 
