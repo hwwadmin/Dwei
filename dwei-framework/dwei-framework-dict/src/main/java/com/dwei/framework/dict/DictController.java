@@ -31,8 +31,8 @@ public class DictController {
     /**
      * 根据字典类型编码查询字典
      */
-    @GetMapping("/{code}")
-    public DictResponse code(@PathVariable String code) {
+    @GetMapping("/code")
+    public DictResponse code(@RequestParam String code) {
         return dictService.code(code);
     }
 
