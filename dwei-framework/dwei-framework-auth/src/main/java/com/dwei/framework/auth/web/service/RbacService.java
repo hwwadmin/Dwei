@@ -3,8 +3,6 @@ package com.dwei.framework.auth.web.service;
 import com.dwei.common.utils.Assert;
 import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
-import com.dwei.domain.entity.PermissionEntity;
-import com.dwei.domain.entity.RoleEntity;
 import com.dwei.domain.entity.RolePermissionEntity;
 import com.dwei.domain.entity.UserRoleEntity;
 import com.dwei.domain.repository.IRolePermissionRepository;
@@ -33,7 +31,7 @@ public class RbacService {
 
     public List<PermissionResponse> listPermission(Long roleId) {
         var permissionList = RolePermissionUtils.get(roleId);
-        return Lists.map(permissionList, this::convertResponse);
+        return Lists.map(permissionList, PermissionResponse::convert);
     }
 
     @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -107,17 +105,6 @@ public class RbacService {
 
         rolePermissionRepository.delBatch(result);
         RolePermissionUtils.refresh(roleId);
-    }
-
-    private PermissionResponse convertResponse(PermissionEntity entity) {
-        return PermissionResponse.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .tag(entity.getTag())
-                .path(entity.getPath())
-                .method(entity.getMethod())
-                .enable(entity.getEnable())
-                .build();
     }
 
 }

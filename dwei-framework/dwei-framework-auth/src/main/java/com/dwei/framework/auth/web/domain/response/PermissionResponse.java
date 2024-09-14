@@ -1,5 +1,6 @@
 package com.dwei.framework.auth.web.domain.response;
 
+import com.dwei.domain.entity.PermissionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,5 +38,16 @@ public class PermissionResponse {
      * 是否启用
      */
     private Boolean enable;
+
+    public static PermissionResponse convert(PermissionEntity entity) {
+        return PermissionResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .tag(entity.getTag())
+                .path(entity.getPath())
+                .method(entity.getMethod())
+                .enable(entity.getEnable())
+                .build();
+    }
 
 }
