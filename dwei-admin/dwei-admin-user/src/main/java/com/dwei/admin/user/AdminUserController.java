@@ -62,4 +62,12 @@ public class AdminUserController {
         adminUserService.bindRole(request);
     }
 
+    /**
+     * 用户解绑角色
+     */
+    @PostMapping("/unBind-role")
+    public void unBindRole(@Valid @RequestBody UserBindRoleRequest request) {
+        adminUserService.unBindRole(request);
+    }
+
 }

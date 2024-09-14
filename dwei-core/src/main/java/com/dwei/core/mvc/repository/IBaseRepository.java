@@ -25,4 +25,24 @@ public interface IBaseRepository<M extends BaseMapper<T>, T extends BaseEntity> 
      */
     List<T> autoPage(Object condition);
 
+    /**
+     * 硬删除
+     */
+    void del(T entity);
+
+    /**
+     * 软删除
+     */
+    void softDel(T entity);
+
+    /**
+     * 批量硬删除
+     */
+    void delBatch(List<T> entityList);
+
+    /**
+     * 批量软删除
+     */
+    void softDelBatch(List<T> entityList);
+
 }

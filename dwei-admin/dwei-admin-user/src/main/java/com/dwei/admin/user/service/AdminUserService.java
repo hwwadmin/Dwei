@@ -69,6 +69,10 @@ public class AdminUserService {
         rbacService.userBindRole(AdminUserConstants.USER_TYPE, request.getUserId(), request.getRoleId());
     }
 
+    public void unBindRole(UserBindRoleRequest request) {
+        rbacService.userUnBindRole(AdminUserConstants.USER_TYPE, request.getUserId(), request.getRoleId());
+    }
+
     private UserInfoResponse toResponse(UserEntity user) {
         return UserInfoResponse.builder()
                 .id(user.getId())
