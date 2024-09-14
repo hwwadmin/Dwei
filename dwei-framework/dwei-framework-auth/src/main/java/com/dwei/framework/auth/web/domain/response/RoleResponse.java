@@ -1,5 +1,6 @@
 package com.dwei.framework.auth.web.domain.response;
 
+import com.dwei.domain.entity.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +28,14 @@ public class RoleResponse {
      * 是否启用
      */
     private Boolean enable;
+
+    public static RoleResponse convert(RoleEntity entity) {
+        return RoleResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .tag(entity.getTag())
+                .enable(entity.getEnable())
+                .build();
+    }
 
 }

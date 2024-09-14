@@ -28,7 +28,7 @@ public class RbacService {
 
     public List<RoleResponse> listRole(String userType, Long userId) {
         var roleList = UserRoleUtils.get(userType, userId);
-        return Lists.map(roleList, this::convertResponse);
+        return Lists.map(roleList, RoleResponse::convert);
     }
 
     public List<PermissionResponse> listPermission(Long roleId) {
@@ -107,15 +107,6 @@ public class RbacService {
 
         rolePermissionRepository.delBatch(result);
         RolePermissionUtils.refresh(roleId);
-    }
-
-    private RoleResponse convertResponse(RoleEntity entity) {
-        return RoleResponse.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .tag(entity.getTag())
-                .enable(entity.getEnable())
-                .build();
     }
 
     private PermissionResponse convertResponse(PermissionEntity entity) {
