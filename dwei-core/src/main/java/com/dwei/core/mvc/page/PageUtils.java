@@ -35,8 +35,8 @@ public abstract class PageUtils {
     }
 
     public static void startPage() {
-        var pageDomain = getPageDomain();
-        PageHelper.startPage(pageDomain.getPageNum(), pageDomain.getPageSize(), pageDomain.buildOrder());
+        var pageInfo = getPageDomain();
+        startPage(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.buildOrder());
     }
 
     /**
