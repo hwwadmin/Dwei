@@ -60,9 +60,7 @@ public class AdminUserService {
     }
 
     public UserInfoResponse userInfo() {
-        var user = userRepository.getById(AuthUtils.getUserId());
-        Assert.nonNull(user);
-        return toResponse(user);
+        return toResponse(userRepository.getEx(AuthUtils.getUserId()));
     }
 
     public void bindRole(UserBindRoleRequest request) {

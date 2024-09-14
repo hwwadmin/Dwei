@@ -81,8 +81,7 @@ public class DictService {
 
     @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
     public void updateDict(DictUpdateRequest request) {
-        var dict = dictRepository.getById(request.getId());
-        Assert.nonNull(dict);
+        var dict = dictRepository.getEx(request.getId());
 
         dict.setName(request.getName());
         dict.setRemark(request.getRemark());
@@ -94,8 +93,7 @@ public class DictService {
 
     @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
     public void updateDictData(DictDataUpdateRequest request) {
-        var dictData = dictDataRepository.getById(request.getId());
-        Assert.nonNull(dictData);
+        var dictData = dictDataRepository.getEx(request.getId());
 
         dictData.setSeq(request.getSeq());
         dictData.setLabel(request.getLabel());

@@ -37,4 +37,12 @@ public class PermissionController {
         permissionService.add(request);
     }
 
+    /**
+     * 是否启用
+     */
+    @PostMapping("/{id}/{enable}")
+    public void enable(@PathVariable Long id, @PathVariable boolean enable) {
+        permissionService.enable(id, enable);
+    }
+
 }

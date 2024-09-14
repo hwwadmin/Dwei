@@ -113,13 +113,20 @@ public abstract class BaseRepository<M extends BaseMapper<T>, T extends BaseEnti
     }
 
     @Override
-    public T getById(Serializable id) {
+    public T get(Serializable id) {
         return getMapper().selectById(id);
     }
 
     @Override
-    public Optional<T> getOptById(Serializable id) {
-        return Optional.ofNullable(getById(id));
+    public T getEx(Serializable id) {
+        var entity = get(id);
+        Assert.nonNull(entity, "[{}]不存在", id);
+        return entity;
+    }
+
+    @Override
+    public Optional<T> getOpt(Serializable id) {
+        return Optional.ofNullable(get(id));
     }
 
     @Override
@@ -148,7 +155,7 @@ public abstract class BaseRepository<M extends BaseMapper<T>, T extends BaseEnti
     public void save(T entity) {
         Assert.nonNull(entity);
         entity.init();
-        boolean result = Objects.isNull(getById(entity.getId())) ?
+        boolean result = Objects.isNull(get(entity.getId())) ?
                 SqlHelper.retBool(getMapper().insert(entity)) :
                 SqlHelper.retBool(getMapper().updateById(entity));
         Assert.isTrue(result, "保存失败");

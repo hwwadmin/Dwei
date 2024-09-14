@@ -23,7 +23,7 @@ public class SimpleCacheRepository<
     public SimpleCacheRepository(R repository, String serviceName) {
         // 默认使用id做code的情况
         super(repository, serviceName, repository.getEntityClass(),
-                t -> String.valueOf(t.getId()), (code, r) -> r.getOptById(Integer.valueOf(code)));
+                t -> String.valueOf(t.getId()), (code, r) -> r.getOpt(Integer.valueOf(code)));
     }
 
     public SimpleCacheRepository(R repository, String serviceName,

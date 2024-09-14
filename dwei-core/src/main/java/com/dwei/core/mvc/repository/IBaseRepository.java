@@ -34,13 +34,20 @@ public interface IBaseRepository<M extends BaseMapper<T>, T extends BaseEntity> 
 
     /**
      * 根据 ID 查询
+     * 对应数据不存在返回null
      */
-    T getById(Serializable id);
+    T get(Serializable id);
+
+    /**
+     * 根据 ID 查询
+     * 对应数据不存在会抛出异常
+     */
+    T getEx(Serializable id);
 
     /**
      * 根据 ID 查询，返回一个Option对象
      */
-    Optional<T> getOptById(Serializable id);
+    Optional<T> getOpt(Serializable id);
 
     /**
      * 根据ID 批量查询
