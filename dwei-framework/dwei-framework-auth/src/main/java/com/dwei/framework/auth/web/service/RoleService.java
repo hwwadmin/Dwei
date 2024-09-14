@@ -16,7 +16,7 @@ public class RoleService {
     private final IRoleRepository roleRepository;
 
     public PageResponse<RoleResponse> page(RolePageRequest request) {
-        var page = roleRepository.autoPage(request);
+        var page = roleRepository.page(request);
         return PageResponse.of(page, RoleResponse::convert);
     }
 

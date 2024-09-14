@@ -19,7 +19,7 @@ public class ConfigService {
     private final IConfigRepository configRepository;
 
     public PageResponse<ConfigResponse> page(ConfigPageRequest request) {
-        var configs = configRepository.autoPage(request);
+        var configs = configRepository.page(request);
         return PageResponse.of(configs, ConfigResponse::covert);
     }
 

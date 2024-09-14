@@ -28,7 +28,7 @@ public class DictService {
     private final IDictDataRepository dictDataRepository;
 
     public PageResponse<DictResponse> page(DictPageRequest request) {
-        List<DictEntity> dicts = dictRepository.autoPage(request);
+        List<DictEntity> dicts = dictRepository.page(request);
         if (ObjectUtils.isNull(dicts)) return PageResponse.empty();
 
         // dict data

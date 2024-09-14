@@ -130,7 +130,7 @@ public abstract class BaseRepository<M extends BaseMapper<T>, T extends BaseEnti
     }
 
     @Override
-    public List<T> listByIds(final Collection<? extends Serializable> idList) {
+    public List<T> list(final Collection<? extends Serializable> idList) {
         if (ObjectUtils.isNull(idList)) return Lists.of();
         return getMapper().selectBatchIds(idList);
     }
@@ -141,14 +141,14 @@ public abstract class BaseRepository<M extends BaseMapper<T>, T extends BaseEnti
     }
 
     @Override
-    public List<T> autoQuery(Object condition) {
+    public List<T> query(Object condition) {
         return QueryConditionUtils.chainBuild(getMapper(), condition).list();
     }
 
     @Override
-    public List<T> autoPage(Object condition) {
+    public List<T> page(Object condition) {
         PageUtils.startPage();
-        return autoQuery(condition);
+        return query(condition);
     }
 
     @Override

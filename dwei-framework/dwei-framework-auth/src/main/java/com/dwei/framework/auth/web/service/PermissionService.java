@@ -18,7 +18,7 @@ public class PermissionService {
     private final IPermissionRepository permissionRepository;
 
     public PageResponse<PermissionResponse> page(PermissionPageRequest request) {
-        var page = permissionRepository.autoPage(request);
+        var page = permissionRepository.page(request);
         return PageResponse.of(page, PermissionResponse::convert);
     }
 

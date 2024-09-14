@@ -52,7 +52,7 @@ public interface IBaseRepository<M extends BaseMapper<T>, T extends BaseEntity> 
     /**
      * 根据ID 批量查询
      */
-    List<T> listByIds(Collection<? extends Serializable> idList);
+    List<T> list(Collection<? extends Serializable> idList);
 
     /**
      * 获取全部数据
@@ -63,13 +63,13 @@ public interface IBaseRepository<M extends BaseMapper<T>, T extends BaseEntity> 
      * 自动条件查询
      * 条件由解析condition后自动构造
      */
-    List<T> autoQuery(Object condition);
+    List<T> query(Object condition);
 
     /**
      * 自动分页查询
      * 条件由解析condition后自动构造
      */
-    List<T> autoPage(Object condition);
+    List<T> page(Object condition);
 
     /**
      * 保存（新增or更新）
