@@ -4,7 +4,7 @@ import com.dwei.core.mvc.condition.annotation.QueryCondition;
 import lombok.Data;
 
 @Data
-public class ConfigQueryRequest {
+public class ConfigPageRequest {
 
     /**
      * 参数名称

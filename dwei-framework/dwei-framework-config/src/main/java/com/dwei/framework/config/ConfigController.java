@@ -2,7 +2,7 @@ package com.dwei.framework.config;
 
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.framework.config.domain.request.ConfigAddRequest;
-import com.dwei.framework.config.domain.request.ConfigQueryRequest;
+import com.dwei.framework.config.domain.request.ConfigPageRequest;
 import com.dwei.framework.config.domain.response.ConfigResponse;
 import com.dwei.framework.config.service.ConfigService;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class ConfigController {
      * 分页查询
      */
     @GetMapping
-    public PageResponse<ConfigResponse> list(ConfigQueryRequest request) {
+    public PageResponse<ConfigResponse> page(ConfigPageRequest request) {
         return configService.page(request);
     }
 

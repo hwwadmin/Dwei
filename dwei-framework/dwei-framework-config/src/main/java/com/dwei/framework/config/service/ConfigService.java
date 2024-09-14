@@ -5,7 +5,7 @@ import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.domain.entity.ConfigEntity;
 import com.dwei.domain.repository.IConfigRepository;
 import com.dwei.framework.config.domain.request.ConfigAddRequest;
-import com.dwei.framework.config.domain.request.ConfigQueryRequest;
+import com.dwei.framework.config.domain.request.ConfigPageRequest;
 import com.dwei.framework.config.domain.response.ConfigResponse;
 import com.dwei.framework.config.utils.ConfigUtils;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class ConfigService {
 
     private final IConfigRepository configRepository;
 
-    public PageResponse<ConfigResponse> page(ConfigQueryRequest request) {
+    public PageResponse<ConfigResponse> page(ConfigPageRequest request) {
         var configs = configRepository.autoPage(request);
         return PageResponse.of(configs, ConfigResponse::covert);
     }
