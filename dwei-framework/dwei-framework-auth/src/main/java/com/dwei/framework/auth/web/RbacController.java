@@ -28,16 +28,16 @@ public class RbacController {
      * 通用接口，使用该接口的话需要前端明确了解用户类型
      * 建议使用对应类型用户模块提供的相应接口隔离前端感知用户类型
      */
-    @GetMapping("/role/{type}/{userId}")
-    public List<RoleResponse> listRole(@PathVariable String type, @PathVariable Long userId) {
+    @GetMapping("/role-list")
+    public List<RoleResponse> listRole(@RequestParam String type, @RequestParam Long userId) {
         return rbacService.listRole(type, userId);
     }
 
     /**
      * 查询角色的权限列表
      */
-    @GetMapping("/permission/{roleId}")
-    public List<PermissionResponse> listPermission(@PathVariable Long roleId) {
+    @GetMapping("/permission-list")
+    public List<PermissionResponse> listPermission(@RequestParam Long roleId) {
         return rbacService.listPermission(roleId);
     }
 
