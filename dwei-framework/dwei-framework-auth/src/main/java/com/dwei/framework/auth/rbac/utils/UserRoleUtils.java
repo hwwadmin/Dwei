@@ -55,7 +55,7 @@ public class UserRoleUtils {
                 .toList();
         if (ObjectUtils.isNull(roleIds)) return Lists.of();
 
-        return roleIds.stream().map(RoleUtils::get).collect(Collectors.toList());
+        return roleIds.stream().map(RoleUtils::get).filter(RoleEntity::getEnable).collect(Collectors.toList());
     }
 
     /**

@@ -48,7 +48,7 @@ public class RolePermissionUtils {
                 .toList();
         if (ObjectUtils.isNull(permissionIds)) return Lists.of();
 
-        return permissionIds.stream().map(PermissionUtils::get).collect(Collectors.toList());
+        return permissionIds.stream().map(PermissionUtils::get).filter(PermissionEntity::getEnable).collect(Collectors.toList());
     }
 
     /**
