@@ -24,8 +24,8 @@ public class DictController {
      * 分页查询
      */
     @GetMapping
-    public PageResponse<DictResponse> list(DictQueryRequest request) {
-        return dictService.list(request);
+    public PageResponse<DictResponse> page(DictPageRequest request) {
+        return dictService.page(request);
     }
 
     /**

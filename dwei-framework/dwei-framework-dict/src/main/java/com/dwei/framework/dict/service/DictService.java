@@ -6,8 +6,6 @@ import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.domain.entity.DictDataEntity;
 import com.dwei.domain.entity.DictEntity;
-import com.dwei.domain.query.dict.DictQuery;
-import com.dwei.domain.query.dictdata.DictDataQuery;
 import com.dwei.domain.repository.IDictDataRepository;
 import com.dwei.domain.repository.IDictRepository;
 import com.dwei.framework.dict.domain.request.*;
@@ -29,18 +27,13 @@ public class DictService {
     private final IDictRepository dictRepository;
     private final IDictDataRepository dictDataRepository;
 
-    public PageResponse<DictResponse> list(DictQueryRequest request) {
-        List<DictEntity> dicts = dictRepository.autoPage(DictQuery.builder()
-                .name(request.getName())
-                .code(request.getCode())
-                .build());
+    public PageResponse<DictResponse> page(DictPageRequest request) {
+        List<DictEntity> dicts = dictRepository.autoPage(request);
         if (ObjectUtils.isNull(dicts)) return PageResponse.empty();
 
         // dict data
         List<String> dictCodeList = Lists.map(dicts, DictEntity::getCode);
-        List<DictDataEntity> dictDataEntities = dictDataRepository.autoQuery(DictDataQuery.builder()
-                .dictCodeIn(dictCodeList)
-                .build());
+        List<DictDataEntity> dictDataEntities = dictDataRepository.findByDictCode(dictCodeList);
         Map<String, List<DictDataResponse>> dictDataGroup = dictDataEntities.stream()
                 .map(this::convertResponse)
                 .collect(Collectors.groupingBy(DictDataResponse::getDictCode));
