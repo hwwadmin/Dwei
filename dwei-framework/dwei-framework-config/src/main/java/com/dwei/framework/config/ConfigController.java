@@ -26,7 +26,7 @@ public class ConfigController {
      */
     @GetMapping
     public PageResponse<ConfigResponse> list(ConfigQueryRequest request) {
-        return configService.list(request);
+        return configService.page(request);
     }
 
     /**

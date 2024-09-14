@@ -3,7 +3,6 @@ package com.dwei.framework.config.service;
 import com.dwei.common.utils.Assert;
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.domain.entity.ConfigEntity;
-import com.dwei.domain.query.config.ConfigQuery;
 import com.dwei.domain.repository.IConfigRepository;
 import com.dwei.framework.config.domain.request.ConfigAddRequest;
 import com.dwei.framework.config.domain.request.ConfigQueryRequest;
@@ -19,11 +18,9 @@ public class ConfigService {
 
     private final IConfigRepository configRepository;
 
-    public PageResponse<ConfigResponse> list(ConfigQueryRequest request) {
-        var configs = configRepository.autoPage(ConfigQuery.builder()
-                .name(request.getName())
-                .build());
-        return PageResponse.of(configs, this::covertResponse);
+    public PageResponse<ConfigResponse> page(ConfigQueryRequest request) {
+        var configs = configRepository.autoPage(request);
+        return PageResponse.of(configs, ConfigResponse::covert);
     }
 
     @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
@@ -41,17 +38,6 @@ public class ConfigService {
 
         configRepository.save(config);
         ConfigUtils.refresh(config.getKey());
-    }
-
-    private ConfigResponse covertResponse(ConfigEntity config) {
-        return ConfigResponse.builder()
-                .id(config.getId())
-                .name(config.getName())
-                .key(config.getKey())
-                .value(config.getValue())
-                .isSystem(config.getIsSystem())
-                .remark(config.getRemark())
-                .build();
     }
 
 }

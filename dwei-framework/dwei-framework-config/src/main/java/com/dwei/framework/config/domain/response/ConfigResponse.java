@@ -1,5 +1,6 @@
 package com.dwei.framework.config.domain.response;
 
+import com.dwei.domain.entity.ConfigEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,5 +38,16 @@ public class ConfigResponse {
      * 备注
      */
     private String remark;
+
+    public static ConfigResponse covert(ConfigEntity config) {
+        return ConfigResponse.builder()
+                .id(config.getId())
+                .name(config.getName())
+                .key(config.getKey())
+                .value(config.getValue())
+                .isSystem(config.getIsSystem())
+                .remark(config.getRemark())
+                .build();
+    }
 
 }
