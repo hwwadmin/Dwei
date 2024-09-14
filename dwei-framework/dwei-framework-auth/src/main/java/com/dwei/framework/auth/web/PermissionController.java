@@ -2,6 +2,7 @@ package com.dwei.framework.auth.web;
 
 import com.dwei.core.mvc.pojo.response.PageResponse;
 import com.dwei.framework.auth.web.domain.request.PermissionAddRequest;
+import com.dwei.framework.auth.web.domain.request.PermissionEnableRequest;
 import com.dwei.framework.auth.web.domain.request.PermissionPageRequest;
 import com.dwei.framework.auth.web.domain.response.PermissionResponse;
 import com.dwei.framework.auth.web.service.PermissionService;
@@ -40,9 +41,9 @@ public class PermissionController {
     /**
      * 是否启用
      */
-    @PostMapping("/{id}/{enable}")
-    public void enable(@PathVariable Long id, @PathVariable boolean enable) {
-        permissionService.enable(id, enable);
+    @PostMapping("/enable")
+    public void enable(@Valid @RequestBody PermissionEnableRequest request) {
+        permissionService.enable(request);
     }
 
 }

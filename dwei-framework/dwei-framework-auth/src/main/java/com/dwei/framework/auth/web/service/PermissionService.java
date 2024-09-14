@@ -5,6 +5,7 @@ import com.dwei.domain.entity.PermissionEntity;
 import com.dwei.domain.repository.IPermissionRepository;
 import com.dwei.framework.auth.rbac.utils.PermissionUtils;
 import com.dwei.framework.auth.web.domain.request.PermissionAddRequest;
+import com.dwei.framework.auth.web.domain.request.PermissionEnableRequest;
 import com.dwei.framework.auth.web.domain.request.PermissionPageRequest;
 import com.dwei.framework.auth.web.domain.response.PermissionResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +35,11 @@ public class PermissionService {
     }
 
     @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
-    public void enable(Long id, boolean enable) {
-        var entity = permissionRepository.getEx(id);
-        entity.setEnable(enable);
+    public void enable(PermissionEnableRequest request) {
+        var entity = permissionRepository.getEx(request.getId());
+        entity.setEnable(request.getEnable());
         permissionRepository.save(entity);
-        PermissionUtils.refresh(id);
+        PermissionUtils.refresh(entity.getId());
     }
 
 }
