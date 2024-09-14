@@ -36,7 +36,6 @@ public class RbacService {
                 .userId(userId)
                 .roleId(roleId)
                 .build();
-        entity.init();
 
         userRoleRepository.save(entity);
         UserRoleUtils.refresh(userType, userId);
@@ -73,7 +72,6 @@ public class RbacService {
                 .roleId(roleId)
                 .permissionId(permissionId)
                 .build();
-        entity.init();
 
         rolePermissionRepository.save(entity);
         RolePermissionUtils.refresh(roleId);

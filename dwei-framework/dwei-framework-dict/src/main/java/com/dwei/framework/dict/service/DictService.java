@@ -38,7 +38,7 @@ public class DictService {
 
         // dict data
         List<String> dictCodeList = Lists.map(dicts, DictEntity::getCode);
-        List<DictDataEntity> dictDataEntities = dictDataRepository.autoQueue(DictDataQuery.builder()
+        List<DictDataEntity> dictDataEntities = dictDataRepository.autoQuery(DictDataQuery.builder()
                 .dictCodeIn(dictCodeList)
                 .build());
         Map<String, List<DictDataResponse>> dictDataGroup = dictDataEntities.stream()
@@ -64,7 +64,6 @@ public class DictService {
                 .remark(request.getRemark())
                 .enable(true)
                 .build();
-        dict.init();
 
         dictRepository.save(dict);
         DictUtils.refresh(dict.getCode());
@@ -82,7 +81,6 @@ public class DictService {
                 .value(request.getValue())
                 .enable(true)
                 .build();
-        dicData.init();
 
         dictDataRepository.save(dicData);
         DictUtils.refresh(dicData.getDictCode());
@@ -96,9 +94,8 @@ public class DictService {
         dict.setName(request.getName());
         dict.setRemark(request.getRemark());
         dict.setEnable(request.getEnable());
-        dict.update();
 
-        dictRepository.saveOrUpdate(dict);
+        dictRepository.save(dict);
         DictUtils.refresh(dict.getCode());
     }
 
@@ -112,9 +109,8 @@ public class DictService {
         dictData.setLabelEn(request.getLabelEn());
         dictData.setValue(request.getValue());
         dictData.setEnable(request.getEnable());
-        dictData.update();
 
-        dictDataRepository.saveOrUpdate(dictData);
+        dictDataRepository.save(dictData);
         DictUtils.refresh(dictData.getDictCode());
     }
 

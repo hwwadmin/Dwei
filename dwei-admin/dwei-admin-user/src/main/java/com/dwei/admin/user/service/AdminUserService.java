@@ -55,7 +55,7 @@ public class AdminUserService {
                 .phone(request.getPhone())
                 .sex(request.getSex())
                 .build();
-        user.init();
+
         userRepository.save(user);
     }
 

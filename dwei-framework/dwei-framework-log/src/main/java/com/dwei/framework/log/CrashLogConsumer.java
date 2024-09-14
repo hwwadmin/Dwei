@@ -46,7 +46,6 @@ public class CrashLogConsumer {
         logEntity.setBodyParam(RequestUtils.getBodyParam(request));
         logEntity.setMessage(ExceptionUtil.getSimpleMessage(ex));
         logEntity.setStackException(ExStackUtils.getStack(ex));
-        logEntity.init();
 
         RedisUtils.support().getOps4list().leftPush(CrashLogConstant.CRASH_LOG_CACHE_DATA_KEY, JsonUtils.bean2JsonStr(logEntity));
     }
@@ -65,7 +64,7 @@ public class CrashLogConsumer {
                 var logEntity = JsonUtils.jsonStr2Bean((String) cache, CrashLogEntity.class);
                 entities.add(logEntity);
             }
-            if (ObjectUtils.nonNull(entities)) crashLogRepository.saveOrUpdateBatch(entities);
+            if (ObjectUtils.nonNull(entities)) crashLogRepository.saveBatch(entities);
             return null;
         });
     }

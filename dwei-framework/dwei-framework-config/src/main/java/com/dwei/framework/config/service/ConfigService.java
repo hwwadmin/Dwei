@@ -38,7 +38,6 @@ public class ConfigService {
                 .isSystem(false)
                 .remark(request.getRemark())
                 .build();
-        config.init();
 
         configRepository.save(config);
         ConfigUtils.refresh(config.getKey());
