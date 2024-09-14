@@ -1,16 +1,23 @@
 package com.dwei.framework.auth.web.service;
 
 import com.dwei.common.utils.Assert;
+import com.dwei.common.utils.Lists;
 import com.dwei.common.utils.ObjectUtils;
+import com.dwei.domain.entity.PermissionEntity;
+import com.dwei.domain.entity.RoleEntity;
 import com.dwei.domain.entity.RolePermissionEntity;
 import com.dwei.domain.entity.UserRoleEntity;
 import com.dwei.domain.repository.IRolePermissionRepository;
 import com.dwei.domain.repository.IUserRoleRepository;
 import com.dwei.framework.auth.rbac.utils.RolePermissionUtils;
 import com.dwei.framework.auth.rbac.utils.UserRoleUtils;
+import com.dwei.framework.auth.web.domain.response.PermissionResponse;
+import com.dwei.framework.auth.web.domain.response.RoleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +25,16 @@ public class RbacService {
 
     private final IUserRoleRepository userRoleRepository;
     private final IRolePermissionRepository rolePermissionRepository;
+
+    public List<RoleResponse> listRole(String userType, Long userId) {
+        var roleList = UserRoleUtils.get(userType, userId);
+        return Lists.map(roleList, this::convertResponse);
+    }
+
+    public List<PermissionResponse> listPermission(Long roleId) {
+        var permissionList = RolePermissionUtils.get(roleId);
+        return Lists.map(permissionList, this::convertResponse);
+    }
 
     @Transactional(rollbackFor = {Exception.class, RuntimeException.class})
     public void userBindRole(String userType, Long userId, Long roleId) {
@@ -90,6 +107,26 @@ public class RbacService {
 
         rolePermissionRepository.delBatch(result);
         RolePermissionUtils.refresh(roleId);
+    }
+
+    private RoleResponse convertResponse(RoleEntity entity) {
+        return RoleResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .tag(entity.getTag())
+                .enable(entity.getEnable())
+                .build();
+    }
+
+    private PermissionResponse convertResponse(PermissionEntity entity) {
+        return PermissionResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .tag(entity.getTag())
+                .path(entity.getPath())
+                .method(entity.getMethod())
+                .enable(entity.getEnable())
+                .build();
     }
 
 }

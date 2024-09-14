@@ -3,6 +3,8 @@ package com.dwei.framework.auth.rbac.check;
 import com.dwei.common.utils.Assert;
 import com.dwei.common.utils.ObjectUtils;
 import com.dwei.core.utils.RequestUtils;
+import com.dwei.domain.entity.PermissionEntity;
+import com.dwei.domain.entity.RoleEntity;
 import com.dwei.framework.auth.rbac.utils.RolePermissionUtils;
 import com.dwei.framework.auth.rbac.utils.UserRoleUtils;
 import com.dwei.framework.auth.token.Token;
@@ -26,7 +28,10 @@ public class RbacCheckDefault implements RbacCheck {
     @Override
     public void checkAuth(HttpServletRequest request, Token token) {
         // role
-        var roleList = UserRoleUtils.get(token.getUserType(), token.getUserId());
+        var roleList = UserRoleUtils.get(token.getUserType(), token.getUserId())
+                .stream()
+                .filter(RoleEntity::getEnable)
+                .toList();
         Assert.isNotEmpty(roleList);
 
         // admin管理员用户拥有全部权限
@@ -36,6 +41,7 @@ public class RbacCheckDefault implements RbacCheck {
         var permissionList = roleList.stream()
                 .map(role -> RolePermissionUtils.get(role.getId()))
                 .flatMap(List::stream)
+                .filter(PermissionEntity::getEnable)
                 .toList();
         Assert.isNotEmpty(permissionList);
 
