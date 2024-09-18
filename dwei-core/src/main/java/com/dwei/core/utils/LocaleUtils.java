@@ -37,19 +37,31 @@ public class LocaleUtils {
                         .findFirst()
                         .map(LocaleUtils::parseLocale)
                         .orElse(Locale.ENGLISH) : Locale.ENGLISH;
-        setLocale(locale, request, response);
+        setWebLocale(locale, request, response);
     }
 
     /**
      * 设置web请求的Locale
      */
-    public static void setLocale(Locale locale, HttpServletRequest request, HttpServletResponse response) {
+    public static void setWebLocale(Locale locale, HttpServletRequest request, HttpServletResponse response) {
         if (ObjectUtils.nonNull(request)) {
             // 设置web请求的Locale
             var localeResolver = RequestContextUtils.getLocaleResolver(request);
             if (ObjectUtils.nonNull(localeResolver)) localeResolver.setLocale(request, response, locale);
         }
         setLocale(locale);
+    }
+
+    /**
+     * 从web请求读出Locale
+     */
+    public static Locale getWebLocale(HttpServletRequest request) {
+        if (ObjectUtils.nonNull(request)) {
+            // 设置web请求的Locale
+            var locale = RequestContextUtils.getLocale(request);
+            if (ObjectUtils.nonNull(locale)) return locale;
+        }
+        return getLocale();
     }
 
     /**
