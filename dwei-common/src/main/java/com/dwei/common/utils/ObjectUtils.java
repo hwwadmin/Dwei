@@ -33,13 +33,15 @@ public abstract class ObjectUtils {
     }
 
     public static boolean isNull(Object obj) {
-        if (Objects.isNull(obj)) return true;
+        if (obj == null) return true;
+
         if (obj instanceof String) return StringUtils.isBlank((String) obj);
         if (obj instanceof CharSequence) return StringUtils.isBlank((CharSequence) obj);
         if (obj instanceof Collection) return CollectionUtils.isEmpty((Collection<?>) obj);
         if (obj instanceof Map) return Maps.isEmpty((Map<?, ?>) obj);
         if (obj.getClass().isArray()) return Array.getLength(obj) == 0;
         if (obj instanceof Optional<?> optional) return optional.map(ObjectUtils::isNull).orElse(true);
+
         // else
         return false;
     }
