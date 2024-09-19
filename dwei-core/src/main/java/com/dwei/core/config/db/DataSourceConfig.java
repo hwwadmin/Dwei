@@ -18,18 +18,21 @@ import javax.sql.DataSource;
 @Slf4j
 public class DataSourceConfig {
 
-    @Bean(name = "masterDs")
+    public static final String MASTER_DS = "masterDs";
+    public static final String SLAVE_DS = "slaveDs";
+
+    @Bean(name = MASTER_DS)
     @ConfigurationProperties("spring.datasource.dynamic.master")
     public DataSource masterDs(DruidProperties druidProperties) {
-        log.info("数据源[masterDs]构建");
+        log.info("数据源[{}]构建", MASTER_DS);
         return druidProperties.mixin(DruidDataSourceBuilder.create().build());
     }
 
-    @Bean(name = "slaveDs")
+    @Bean(name = SLAVE_DS)
     @ConfigurationProperties("spring.datasource.dynamic.slave")
     @ConditionalOnProperty(prefix = "spring.datasource.dynamic.slave", name = "enable", havingValue = "true")
     public DataSource slaveDs(DruidProperties druidProperties) {
-        log.info("数据源[slaveDs]构建");
+        log.info("数据源[{}]构建", SLAVE_DS);
         return druidProperties.mixin(DruidDataSourceBuilder.create().build());
     }
 
