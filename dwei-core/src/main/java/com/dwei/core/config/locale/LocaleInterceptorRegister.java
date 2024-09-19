@@ -1,4 +1,4 @@
-package com.dwei.core.config.interceptor.locale;
+package com.dwei.core.config.locale;
 
 import com.dwei.common.utils.Lists;
 import com.dwei.core.config.interceptor.InterceptorInfo;

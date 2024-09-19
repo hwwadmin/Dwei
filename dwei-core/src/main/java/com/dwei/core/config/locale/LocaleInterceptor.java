@@ -1,4 +1,4 @@
-package com.dwei.core.config.interceptor.locale;
+package com.dwei.core.config.locale;
 
 import com.dwei.core.utils.LocaleUtils;
 import jakarta.servlet.http.HttpServletRequest;

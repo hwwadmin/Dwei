@@ -8,6 +8,7 @@ import com.dwei.admin.user.domain.response.TokenResponse;
 import com.dwei.admin.user.domain.response.UserInfoResponse;
 import com.dwei.common.utils.Assert;
 import com.dwei.common.utils.ObjectUtils;
+import com.dwei.core.utils.MessageUtils;
 import com.dwei.core.mvc.password.PasswordEncoder;
 import com.dwei.domain.entity.UserEntity;
 import com.dwei.domain.repository.IUserRepository;
@@ -29,7 +30,7 @@ public class AdminUserService {
                 .eq(UserEntity::getUsername, request.getUsername())
                 .one();
         Assert.nonNull(user);
-        Assert.isTrue(passwordEncoder.checkPw(request.getPassword(), user.getPassword()));
+        Assert.isTrue(passwordEncoder.checkPw(request.getPassword(), user.getPassword()), MessageUtils.message("user.login.error"));
 
         var token = AuthUtils.getTokenApi().createToken(AdminUserConstants.USER_TYPE, user.getId());
 

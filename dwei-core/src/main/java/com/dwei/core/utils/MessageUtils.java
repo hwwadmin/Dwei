@@ -1,8 +1,6 @@
-package com.dwei.core.message;
+package com.dwei.core.utils;
 
 import com.dwei.common.utils.Assert;
-import com.dwei.core.utils.LocaleUtils;
-import com.dwei.core.utils.SpringContextUtils;
 import org.springframework.context.MessageSource;
 
 /**
@@ -20,10 +18,20 @@ public class MessageUtils {
      * 根据消息键和参数获取消息
      *
      * @param code 消息键，且不存在的对应code时即默认为返回的字符串
+     * @return 获取国际化翻译值
+     */
+    public static String message(String code) {
+        return message(code, code, null);
+    }
+
+    /**
+     * 根据消息键和参数获取消息
+     *
+     * @param code 消息键，且不存在的对应code时即默认为返回的字符串
      * @param args 参数
      * @return 获取国际化翻译值
      */
-    public static String message(String code, Object... args) {
+    public static String message(String code, Object[] args) {
         return message(code, code, args);
     }
 
@@ -35,8 +43,8 @@ public class MessageUtils {
      * @param args 参数
      * @return 获取国际化翻译值
      */
-    public static String message(String code, String defaultMessage, Object... args) {
-        Assert.isStrBlank(code);
+    public static String message(String code, String defaultMessage, Object[] args) {
+        Assert.isStrNotBlank(code);
         MessageSource messageSource = SpringContextUtils.getBean(MessageSource.class);
         return messageSource.getMessage(code, args, defaultMessage, LocaleUtils.getLocale());
     }
