@@ -69,16 +69,25 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         List<InterceptorInfo> interceptorInfos = interceptorManager.getInterceptorInfos();
         if (ObjectUtils.isNull(interceptorInfos)) return;
+
         // 拦截器注册
         interceptorInfos.forEach(t -> {
             HandlerInterceptor interceptor = t.getInstance();
-            if (ObjectUtils.isNull(interceptor)) interceptor = SpringContextUtils.getBean(t.getInterceptor());
+            if (ObjectUtils.isNull(interceptor)) {
+                if (ObjectUtils.isNull(t.getClazz())) {
+                    log.warn("[{}]拦截器无法配置", t.getName());
+                    return;
+                }
+                interceptor = SpringContextUtils.getBean(t.getClazz());
+            }
+
             InterceptorRegistration interceptorRegistration = registry.addInterceptor(interceptor);
             if (ObjectUtils.nonNull(t.getOrder())) interceptorRegistration.order(t.getOrder());
             if (ObjectUtils.nonNull(t.getPathPatterns())) interceptorRegistration.addPathPatterns(t.getPathPatterns());
             if (ObjectUtils.nonNull(t.getExcludePathPatterns())) interceptorRegistration.excludePathPatterns(t.getExcludePathPatterns());
             log.info("[{}]拦截器注册成功", t.getName());
         });
+
     }
 
     @Override

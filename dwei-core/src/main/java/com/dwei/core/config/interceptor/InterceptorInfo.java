@@ -15,15 +15,17 @@ import java.util.List;
 @Builder
 public class InterceptorInfo {
 
+    /** 拦截器名称 */
     private String name;
-
-    private Class<? extends HandlerInterceptor> interceptor;
-    private HandlerInterceptor instance; // 如果已经添加了实例就不会自动生成
-
+    /** 拦截器类 */
+    private Class<? extends HandlerInterceptor> clazz;
+    /** 拦截器实例 */
+    private HandlerInterceptor instance;
+    /** 拦截器顺序 */
     private Integer order;
-
+    /** 拦截路径 */
     private List<String> pathPatterns;
-
+    /** 拦截忽略路径 */
     private List<String> excludePathPatterns;
 
 }
