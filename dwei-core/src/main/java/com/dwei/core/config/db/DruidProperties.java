@@ -51,7 +51,7 @@ public class DruidProperties {
     @Value("${spring.datasource.druid.testOnReturn}")
     private boolean testOnReturn;
 
-    public DruidDataSource dataSource(DruidDataSource datasource) {
+    public DruidDataSource mixin(DruidDataSource datasource) {
         /** 配置初始化大小、最小、最大 */
         datasource.setInitialSize(initialSize);
         datasource.setMaxActive(maxActive);
