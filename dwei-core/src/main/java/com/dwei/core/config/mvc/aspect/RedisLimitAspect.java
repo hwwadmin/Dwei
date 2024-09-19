@@ -2,6 +2,7 @@ package com.dwei.core.config.mvc.aspect;
 
 import com.dwei.core.annotation.RedisLimit;
 import com.dwei.core.redis.RedisRateLimiter;
+import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,8 +14,6 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 @Aspect
 @Component

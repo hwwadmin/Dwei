@@ -10,20 +10,21 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 /**
- * 数据源默认配置
+ * 数据源配置
  *
  * @author hww
  */
 @Slf4j
 @Configuration
-public class DefaultDataSource {
+public class DataSourceConfig {
 
     @Primary
-    @Bean(name = "masterDataSource")
-    @ConfigurationProperties("spring.datasource.druid")
-    public DataSource masterDataSource() {
-        log.info("开始创建主数据源");
-        return DruidDataSourceBuilder.create().build();
+    @Bean(name = "masterDs")
+    @ConfigurationProperties("spring.datasource.druid.master")
+    public DataSource masterDs(DruidProperties druidProperties) {
+        var dataSource = DruidDataSourceBuilder.create().build();
+        log.info("master数据库连接, url:[{}], username:[{}]", dataSource.getUrl(), dataSource.getUsername());
+        return druidProperties.dataSource(dataSource);
     }
 
 }
