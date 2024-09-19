@@ -1,10 +1,11 @@
 package com.dwei.core.config.db;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
@@ -14,12 +15,21 @@ import javax.sql.DataSource;
  * @author hww
  */
 @Configuration
+@Slf4j
 public class DataSourceConfig {
 
-    @Primary
     @Bean(name = "masterDs")
-    @ConfigurationProperties("spring.datasource.druid.master")
+    @ConfigurationProperties("spring.datasource.dynamic.master")
     public DataSource masterDs(DruidProperties druidProperties) {
+        log.info("数据源[masterDs]构建");
+        return druidProperties.mixin(DruidDataSourceBuilder.create().build());
+    }
+
+    @Bean(name = "slaveDs")
+    @ConfigurationProperties("spring.datasource.dynamic.slave")
+    @ConditionalOnProperty(prefix = "spring.datasource.dynamic.slave", name = "enable", havingValue = "true")
+    public DataSource slaveDs(DruidProperties druidProperties) {
+        log.info("数据源[slaveDs]构建");
         return druidProperties.mixin(DruidDataSourceBuilder.create().build());
     }
 
