@@ -20,9 +20,9 @@ spring:
   data:
     # redis
     redis:
-      host: localhost
-      port: 6379
-      password:
+      host: 192.168.2.8
+      port: 49153
+      password: redispw
       timeout: 10s
       lettuce:
         pool:
