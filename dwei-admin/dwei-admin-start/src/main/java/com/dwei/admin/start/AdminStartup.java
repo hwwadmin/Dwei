@@ -19,8 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableAsync
 @MapperScan("com.dwei.**.mapper")
-//@EnableElasticsearchRepositories(basePackages = "com.yomi.boot.*")
-//@EnableDubbo(scanBasePackages = {"com.yomi.boot.*"})
+//@EnableElasticsearchRepositories(basePackages = "com.dwei.*")
 public class AdminStartup {
 
     public static void main(String[] args) {

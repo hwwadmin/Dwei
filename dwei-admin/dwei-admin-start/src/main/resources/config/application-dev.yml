@@ -34,26 +34,31 @@ spring:
           max-active: 8
           # #连接池最大阻塞等待时间（使用负值表示没有限制）
           max-wait: -1ms
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8849
 
 # dubbo
-#dubbo:
-#  application:
-#    name: ${spring.application.name}
-#    qos-port: 22222
-#    register-mode: instance
-#    logger: slf4j
-#  protocol:
-#    serialization: hessian2
-#    name: dubbo
-#    port: -1
-#  registry:
-#    address: nacos://192.168.73.120:8848
-#  provider:
-#    filter: traceId
-#  consumer:
-#    check: false
-#    listener: invokerListener
-#    filter: traceId
+dubbo:
+  application:
+    name: ${spring.application.name}
+    qos-port: 22222
+    register-mode: instance
+    logger: slf4j
+  protocol:
+    serialization: hessian2
+    name: dubbo
+    # 设置为-1后会随机选择一个可用端口
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8849
+  provider:
+    filter: traceId
+  consumer:
+    check: false
+    listener: invokerListener
+    filter: traceId
 
 #es
 #es:

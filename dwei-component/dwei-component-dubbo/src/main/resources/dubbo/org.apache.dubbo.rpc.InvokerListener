@@ -1,0 +1,1 @@
+invokerListener=com.yomi.boot.component.dubbo.DubboInvokerListener

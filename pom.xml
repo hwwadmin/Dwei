@@ -10,6 +10,7 @@
         <module>dwei-framework</module>
         <module>dwei-admin</module>
         <module>dwei-domain</module>
+        <module>dwei-component</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -42,7 +43,8 @@
         <plugin.maven-clean-plugin>3.2.0</plugin.maven-clean-plugin>
 
         <!--第三方包引入版本定义-->
-        <dubbo.version>3.2.10</dubbo.version>
+        <dubbo.version>3.2.0</dubbo.version>
+        <nacos.version>2022.0.0.0-RC1</nacos.version>
         <druid.version>1.2.20</druid.version>
         <mysql.version>8.0.31</mysql.version>
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -84,8 +86,19 @@
             <!-- dubbo -->
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
                 <version>${dubbo.version}</version>
+            </dependency>
+            <!-- nacos -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.version}</version>
             </dependency>
             <!-- snakeyaml -->
             <dependency>
