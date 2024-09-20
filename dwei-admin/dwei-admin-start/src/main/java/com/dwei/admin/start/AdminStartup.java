@@ -1,6 +1,7 @@
 package com.dwei.admin.start;
 
 import com.dwei.core.guide.ApplicationBoot;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @MapperScan("com.dwei.**.mapper")
 //@EnableElasticsearchRepositories(basePackages = "com.dwei.*")
+@EnableDubbo(scanBasePackages = {"com.dwei.*"})
 public class AdminStartup {
 
     public static void main(String[] args) {

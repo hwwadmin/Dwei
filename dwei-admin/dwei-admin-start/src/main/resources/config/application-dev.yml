@@ -54,11 +54,11 @@ dubbo:
   registry:
     address: nacos://127.0.0.1:8849
   provider:
-    filter: traceId
+    filter: traceIdFilter
   consumer:
     check: false
     listener: invokerListener
-    filter: traceId
+    filter: traceIdFilter
 
 #es
 #es:
