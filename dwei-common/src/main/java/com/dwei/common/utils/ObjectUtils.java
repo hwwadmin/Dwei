@@ -1,7 +1,5 @@
 package com.dwei.common.utils;
 
-import org.apache.commons.collections4.CollectionUtils;
-
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
