@@ -3,6 +3,7 @@ package com.dwei.component.rocketmq.callback;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author hww
  */
+@Component
 @Slf4j
 public class RocketMqConsumerDefaultCallback implements RocketMqConsumerCallback {
 

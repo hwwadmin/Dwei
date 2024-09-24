@@ -6,6 +6,7 @@ import com.dwei.component.rocketmq.adapter.RocketMqProducerAdapter;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +17,10 @@ import java.util.List;
 @ConditionalOnProperty(value = "rocketmq.producer.enable")
 @ConfigurationProperties(value = "rocketmq.producer")
 @Data
+@Slf4j
 public class RocketMqProducerConfig {
 
+    private boolean enable;
     private List<RocketMqProducerConfigItem> items;
 
     @Data
@@ -32,14 +35,19 @@ public class RocketMqProducerConfig {
 
     @PostConstruct
     public void init() {
+        if (!enable) return;
         if (ObjectUtils.isNull(this.items)) return;
         items.forEach(t -> {
-            Pair<String, String> acl = null;
-            if (ObjectUtils.nonNull(t.getAccessKey()) && ObjectUtils.nonNull(t.getSecretKey())) {
-                acl = new Pair<>(t.getAccessKey(), t.getSecretKey());
+            try {
+                Pair<String, String> acl = null;
+                if (ObjectUtils.nonNull(t.getAccessKey()) && ObjectUtils.nonNull(t.getSecretKey())) {
+                    acl = new Pair<>(t.getAccessKey(), t.getSecretKey());
+                }
+                var producerAdapter = new RocketMqProducerAdapter(t.getNameserver(), t.getGroupName(), acl);
+                producerAdapter.start();
+            } catch (Exception e) {
+                log.error("初始化RocketMqProducer失败", e);
             }
-            var producerAdapter = new RocketMqProducerAdapter(t.getNameserver(), t.getGroupName(), acl);
-            producerAdapter.start();
         });
     }
 

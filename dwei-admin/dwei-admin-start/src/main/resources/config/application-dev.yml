@@ -82,11 +82,11 @@ rocketmq:
       - nameserver: localhost:9876
         group-name: test
         topic: test
-        bean-name: com.dwei.component.rocketmq.callback.RocketMqConsumerDefaultCallback
+        bean-name: rocketMqConsumerDefaultCallback
       - nameserver: localhost:9876
         group-name: test2
         topic: test2
-        bean-name: com.dwei.component.rocketmq.callback.RocketMqConsumerDefaultCallback
+        bean-name: rocketMqConsumerDefaultCallback
 
 # dwei框架配置
 dwei:
