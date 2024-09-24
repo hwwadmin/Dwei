@@ -13,6 +13,7 @@
     <modules>
         <module>dwei-component-dubbo</module>
         <module>dwei-component-rocketmq</module>
+        <module>dwei-component-qrcode</module>
     </modules>
 
 </project>

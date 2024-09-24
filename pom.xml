@@ -62,6 +62,7 @@
         <mybatis-plus-join.version>1.4.13</mybatis-plus-join.version>
         <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
         <oshi.version>6.6.3</oshi.version>
+        <zxing.version>3.5.3</zxing.version>
 
     </properties>
 
@@ -243,6 +244,12 @@
                 <groupId>com.github.oshi</groupId>
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi.version}</version>
+            </dependency>
+            <!-- zxing -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
             </dependency>
 
         </dependencies>
