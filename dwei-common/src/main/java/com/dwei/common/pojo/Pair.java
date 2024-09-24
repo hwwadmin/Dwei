@@ -22,6 +22,10 @@ public class Pair<A, B> {
         return new Pair<>(first, second);
     }
 
+    public boolean isNotNull() {
+        return Objects.nonNull(first) && Objects.nonNull(second);
+    }
+
     public boolean equals(final Object o) {
         if (o == this) return true;
         if (!(o instanceof final Pair<?, ?> other)) return false;

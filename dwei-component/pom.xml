@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>dwei-component-dubbo</module>
+        <module>dwei-component-rocketmq</module>
     </modules>
 
 </project>
