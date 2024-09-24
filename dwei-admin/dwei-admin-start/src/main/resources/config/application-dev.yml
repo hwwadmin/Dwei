@@ -68,22 +68,25 @@ dubbo:
 #  uri: 127.0.0.1:9200
 
 # RocketMQ
-#rocketmq:
-#  enable: false
-#  producer:
-#    - nameserver: localhost:9876
-#      group-name: test
-#    - nameserver: localhost:9876
-#      group-name: test2
-#  consumer:
-#    - nameserver: localhost:9876
-#      group-name: test
-#      topic: test
-#      bean-name: com.yomi.boot.framework.mq.rocketmq.DefaultRocketMqConsumerCallback
-#    - nameserver: localhost:9876
-#      group-name: test2
-#      topic: test2
-#      bean-name: com.yomi.boot.framework.mq.rocketmq.DefaultRocketMqConsumerCallback
+rocketmq:
+  producer:
+    enable: false
+    items:
+      - nameserver: localhost:9876
+        group-name: test
+      - nameserver: localhost:9876
+        group-name: test2
+  consumer:
+    enable: false
+    items:
+      - nameserver: localhost:9876
+        group-name: test
+        topic: test
+        bean-name: com.dwei.component.rocketmq.callback.RocketMqConsumerDefaultCallback
+      - nameserver: localhost:9876
+        group-name: test2
+        topic: test2
+        bean-name: com.dwei.component.rocketmq.callback.RocketMqConsumerDefaultCallback
 
 # dwei框架配置
 dwei:

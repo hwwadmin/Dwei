@@ -52,7 +52,8 @@ public class RocketMqConsumerConfig {
                 acl = new Pair<>(t.getAccessKey(), t.getSecretKey());
             }
             var callbackBean = (RocketMqConsumerCallback) ReflectUtils.newInstance(t.getBeanName());
-            new RocketMqConsumerAdapter(t.getNameserver(), t.getGroupName(), t.getTopic(), t.getTags(), acl, callbackBean);
+            var consumerAdapter = new RocketMqConsumerAdapter(t.getNameserver(), t.getGroupName(), t.getTopic(), t.getTags(), acl, callbackBean);
+            consumerAdapter.start();
         });
     }
 

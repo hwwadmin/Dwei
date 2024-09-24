@@ -38,7 +38,8 @@ public class RocketMqProducerConfig {
             if (ObjectUtils.nonNull(t.getAccessKey()) && ObjectUtils.nonNull(t.getSecretKey())) {
                 acl = new Pair<>(t.getAccessKey(), t.getSecretKey());
             }
-            new RocketMqProducerAdapter(t.getNameserver(), t.getGroupName(), acl);
+            var producerAdapter = new RocketMqProducerAdapter(t.getNameserver(), t.getGroupName(), acl);
+            producerAdapter.start();
         });
     }
 

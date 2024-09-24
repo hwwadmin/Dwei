@@ -23,6 +23,11 @@
             <artifactId>dwei-component-dubbo</artifactId>
             <version>${project.root.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.dwei</groupId>
+            <artifactId>dwei-component-rocketmq</artifactId>
+            <version>${project.root.version}</version>
+        </dependency>
 
     </dependencies>
 

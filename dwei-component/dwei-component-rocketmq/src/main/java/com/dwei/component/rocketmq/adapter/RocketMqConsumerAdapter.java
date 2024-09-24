@@ -62,7 +62,7 @@ public class RocketMqConsumerAdapter {
      */
     @SneakyThrows
     private static MQPushConsumer buildConsumer(String nameserver, String groupName, String topic, String tag,
-                                                   Pair<String, String> acl, RocketMqConsumerCallback consumerCallback) {
+                                                Pair<String, String> acl, RocketMqConsumerCallback consumerCallback) {
         DefaultMQPushConsumer consumer;
         if (ObjectUtils.isNull(acl)) {
             consumer = new DefaultMQPushConsumer(groupName);
@@ -98,7 +98,8 @@ public class RocketMqConsumerAdapter {
             throw UtilsException.exception("RocketMq消费者启动失败", e);
         }
         isRun = true;
-        log.info("####### ------- [{} - {}] RocketMq消费者[启动]", nameserver, groupName);
+        log.info("RocketMq#Consumer[start] [nameserver:{} - groupName:{} - topic:{} - tags:{} - consumer:{}]",
+                nameserver, groupName, topic, tag, consumer.getClass().getSimpleName());
     }
 
     public synchronized void close() {
@@ -109,7 +110,8 @@ public class RocketMqConsumerAdapter {
             throw UtilsException.exception("RocketMq消费者关闭失败", e);
         }
         isRun = false;
-        log.info("####### ------- [{} - {}] RocketMq消费者[关闭]", nameserver, groupName);
+        log.info("RocketMq#Consumer[close] [nameserver:{} - groupName:{} - topic:{} - tags:{} - consumer:{}]",
+                nameserver, groupName, topic, tag, consumer.getClass().getSimpleName());
     }
 
     private static String buildTag(List<String> tags) {

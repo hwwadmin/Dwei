@@ -71,7 +71,7 @@ public class RocketMqProducerAdapter {
             throw UtilsException.exception("RocketMq生产者启动失败", e);
         }
         isRun = true;
-        log.info("####### ------- [{} - {}] RocketMq生产者[启动]", nameserver, groupName);
+        log.info("RocketMq#Producer[start] [nameserver:{} - groupName:{}]", nameserver, groupName);
     }
 
     public synchronized void close() {
@@ -82,7 +82,7 @@ public class RocketMqProducerAdapter {
             throw UtilsException.exception("RocketMq生产者关闭失败", e);
         }
         isRun = false;
-        log.info("####### ------- [{} - {}] RocketMq生产者[关闭]", nameserver, groupName);
+        log.info("RocketMq#Producer[close] [nameserver:{} - groupName:{}]", nameserver, groupName);
     }
 
     // ---------------- send message ---------------- //
@@ -100,7 +100,7 @@ public class RocketMqProducerAdapter {
         try {
             Message message = new Message(topic, tag, msg.getBytes(RemotingHelper.DEFAULT_CHARSET));
             sendResult = producer.send(message, 3000); // 默认3s超时
-            log.info("RocketMQ#Producer[{} - {}] send msg: {}", nameserver, groupName, msg);
+            log.info("RocketMQ#Producer[send] [nameserver:{} - groupName:{}] send msg:[{}]", nameserver, groupName, msg);
         } catch (Exception e) {
             // 异常不抛出返回发送失败即可
             log.error("RocketMqMsg#消息发送异常", e);
