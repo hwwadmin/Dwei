@@ -22,12 +22,12 @@ server:
     threads:
       max: 50
       min-spare: 20
-    remoteip:
+    remote-ip:
       remote-ip-header: X-FORWARDED-FOR
     uriEncoding: UTF-8
     # 自定义临时文件存放目录
     basedir: ./tmp/${spring.application.name}/tomcat_tmp
-    accesslog:
+    access-log:
       enabled: false
       directory: logs
       prefix: server
@@ -46,7 +46,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   session:
     timeout: 1200S
-    store-type: redis
   main:
     banner-mode: log
   output:
