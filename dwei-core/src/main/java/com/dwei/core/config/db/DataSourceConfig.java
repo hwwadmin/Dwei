@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
@@ -21,18 +22,18 @@ public class DataSourceConfig {
     public static final String MASTER_DS = "masterDs";
     public static final String SLAVE_DS = "slaveDs";
 
+    @Primary
     @Bean(name = MASTER_DS)
-    @ConfigurationProperties("spring.datasource.dynamic.master")
+    @ConfigurationProperties("spring.datasource.druid.master")
+    @ConditionalOnProperty(prefix = "spring.datasource.druid.master", name = "url")
     public DataSource masterDs(DruidProperties druidProperties) {
-        log.info("数据源[{}]构建", MASTER_DS);
         return druidProperties.mixin(DruidDataSourceBuilder.create().build());
     }
 
     @Bean(name = SLAVE_DS)
-    @ConfigurationProperties("spring.datasource.dynamic.slave")
-    @ConditionalOnProperty(prefix = "spring.datasource.dynamic.slave", name = "enable", havingValue = "true")
+    @ConfigurationProperties("spring.datasource.druid.slave")
+    @ConditionalOnProperty(prefix = "spring.datasource.druid.slave", name = "url")
     public DataSource slaveDs(DruidProperties druidProperties) {
-        log.info("数据源[{}]构建", SLAVE_DS);
         return druidProperties.mixin(DruidDataSourceBuilder.create().build());
     }
 

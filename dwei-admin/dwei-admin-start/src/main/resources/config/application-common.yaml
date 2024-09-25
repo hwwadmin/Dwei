@@ -55,7 +55,6 @@ spring:
   # db
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
     druid:
       # 初始连接数
       initialSize: 5
