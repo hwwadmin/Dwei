@@ -45,7 +45,7 @@
         <!--第三方包引入版本定义-->
         <dubbo.version>3.2.0</dubbo.version>
         <nacos.version>2022.0.0.0-RC1</nacos.version>
-        <druid.version>1.2.20</druid.version>
+        <druid.version>1.2.23</druid.version>
         <mysql.version>8.0.31</mysql.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>33.3.0-jre</guava.version>
@@ -110,7 +110,7 @@
             <!-- druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
             <!-- mysql -->
@@ -217,16 +217,17 @@
                 <artifactId>spring-kafka</artifactId>
                 <version>${kafka.build.version}</version>
             </dependency>
+            <!-- dynamic-datasource -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus-dynamic.version}</version>
+            </dependency>
             <!-- mybatis-plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
-                <version>${mybatis-plus-dynamic.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.yulichang</groupId>
